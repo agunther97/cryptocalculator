@@ -120,10 +120,16 @@ os.chdir("../")
 if(len(sys.argv) > 1):
     args = sys.argv
     args = args[1:]
-    for arg in args:
-        execute = arg + " "
-    execute = execute[:-1]
-    exec("print("+execute+")")
+    if args[0]=="-f" and not (args[1] is None):
+        f = open(args[1])
+        if (not (f is None)):
+            exec(f.read())
+        #execute file
+    else:
+        for arg in args:
+            execute = arg + " "
+        execute = execute[:-1]
+        exec("print("+execute+")")
 else:
     #enter interactive state
     code.interact(local=dict(globals(), **locals())) 
