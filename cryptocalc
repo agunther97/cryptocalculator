@@ -12,6 +12,8 @@ calculatorFunctions = {}
 #   "description":"Does something lol"
 #}
 
+indent="  "
+
 def registerFunction(fn, data):
     calculatorFunctions[fn]=data
 
@@ -25,6 +27,7 @@ def displayFunctions():
     funcList.sort()
     i=0
     s=""
+    lencap=80
     for f in funcList:
         s+=f+"("
         data = calculatorFunctions[f]
@@ -44,12 +47,32 @@ def displayFunctions():
                 s=s+", "
             i=i+1
     print("Registered Functions:")
-    print(s)
+    #this splits by line length 80 on commas
+    buff=""
+    while len(s)>0:
+        p = s.find("),")
+        if (p==-1):
+            if (len(s)+len(buff))>lencap:
+                print(buff)
+                print(s)
+                buff=""
+                s=""
+            else:
+                buff+=s
+                s=""
+        else:
+            if (len(buff)+p)>lencap:
+                print(indent+buff)
+                buff=""
+            cut=p+3
+            buff+=s[0:cut]
+            s=s[cut:len(s)]
+    if len(buff)>0:
+        print(indent+buff)
     print("Use help(\"functionName\") for more information.")
 
 def displayFunction(fn):
     data=calculatorFunctions[fn]
-    prefix="  "
 
     if "name" in data:
         print(data["name"])
@@ -60,7 +83,7 @@ def displayFunction(fn):
         args=data["arguments"]
     elif "arguments_short" in data:
         args=data["arguments_short"]
-    s=prefix+"Usage: " + fn + "("
+    s=indent+"Usage: " + fn + "("
     for j in range(len(args)):
         s=s+args[j]
         if j<len(args)-1:
@@ -68,7 +91,7 @@ def displayFunction(fn):
     s=s+")"
     print(s)
     if "description" in data:
-        print(prefix+data["description"])
+        print(indent+data["description"])
 
 
 
