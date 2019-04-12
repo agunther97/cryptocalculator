@@ -13,7 +13,31 @@ calculatorFunctions = {}
 #}
 
 indent="  "
+lineCap=80
 
+def fmtWrite(s, splitSearch):
+    #this splits by line length 80 on commas
+    buff=""
+    while len(s)>0:
+        p = s.find(splitSearch)
+        if (p==-1):
+            if (len(s)+len(buff))>lineCap:
+                print(buff)
+                print(s)
+                buff=""
+                s=""
+            else:
+                buff+=s
+                s=""
+        else:
+            if (len(buff)+p)>lineCap:
+                print(indent+buff)
+                buff=""
+            cut=p+3
+            buff+=s[0:cut]
+            s=s[cut:len(s)]
+    if len(buff)>0:
+        print(indent+buff)
 def registerFunction(fn, data):
     calculatorFunctions[fn]=data
 
@@ -27,7 +51,6 @@ def displayFunctions():
     funcList.sort()
     i=0
     s=""
-    lencap=80
     for f in funcList:
         s+=f+"("
         data = calculatorFunctions[f]
@@ -47,28 +70,7 @@ def displayFunctions():
                 s=s+", "
             i=i+1
     print("Registered Functions:")
-    #this splits by line length 80 on commas
-    buff=""
-    while len(s)>0:
-        p = s.find("),")
-        if (p==-1):
-            if (len(s)+len(buff))>lencap:
-                print(buff)
-                print(s)
-                buff=""
-                s=""
-            else:
-                buff+=s
-                s=""
-        else:
-            if (len(buff)+p)>lencap:
-                print(indent+buff)
-                buff=""
-            cut=p+3
-            buff+=s[0:cut]
-            s=s[cut:len(s)]
-    if len(buff)>0:
-        print(indent+buff)
+    fmtWrite(s,"),")
     print("Use help(\"functionName\") for more information.")
 
 def displayFunction(fn):
@@ -89,9 +91,9 @@ def displayFunction(fn):
         if j<len(args)-1:
             s=s+","
     s=s+")"
-    print(s)
+    fmtWrite(s," ")
     if "description" in data:
-        print(indent+data["description"])
+        fmtWrite(indent+data["description"], " ")
 
 
 
@@ -116,5 +118,4 @@ for file in glob.glob("*.py"):
 os.chdir("../")
 
 #enter interactive state
-
 code.interact(local=dict(globals(), **locals())) 
