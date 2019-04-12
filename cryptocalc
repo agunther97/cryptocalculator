@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+
+import glob, os
+os.chdir("./modules")
+
+for file in glob.glob("*.py"):
+	exec(open("./"+file).read())
+
+while(True):
+    line = input()
+    if (line=="quit" or line=="exit"):
+        break
+    exec(line)
