@@ -1,16 +1,9 @@
 #!/usr/bin/env python
 
-import glob, os
+import glob, os, code
 os.chdir("./modules")
 
 for file in glob.glob("*.py"):
 	exec(open("./"+file).read())
 
-while(True):
-    line = input().strip()
-    if (line=="quit" or line=="exit"):
-        break
-    try:
-        exec(line)
-    except:
-        print("Invalid entry.")
+code.interact(local=dict(globals(), **locals())) 
