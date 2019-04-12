@@ -71,7 +71,7 @@ def displayFunctions():
             i=i+1
     print("Registered Functions:")
     fmtWrite(s,"),")
-    print("Use help(\"functionName\") for more information.")
+    print("Use help(functionName) for more information.")
 
 def displayFunction(fn):
     data=calculatorFunctions[fn]
