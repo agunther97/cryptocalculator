@@ -16,3 +16,10 @@ def multiplicative_inverse(a,b):
         q = math.floor(a_0/b_0)
         r = a_0 - (q * b_0)
     return t
+
+registerFunction("multiplicative_inverse", {
+    "name" : "Find multiplicative inverse",
+    "arguments_short":["a", "b"],
+    "arguments":["mod", "value"],
+    "description":"Returns b^-1 mod a"
+})

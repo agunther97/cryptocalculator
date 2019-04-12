@@ -10,3 +10,10 @@ def sam(x, c, n):
         if(c[i] == "1"):
             z = (z*x) % n
     return z
+
+registerFunction("sam", {
+    "name" : "Square and Multiply",
+    "arguments_short":["x", "c", "n"],
+    "arguments":["base", "exponent", "mod"],
+    "description":"Returns a float z s.t. x^c mod n = z"
+})
