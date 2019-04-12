@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import glob, os, code
+import glob, os, code, sys
 
 #set up helper func, list, etc
 calculatorFunctions = {}
@@ -117,5 +117,13 @@ for file in glob.glob("*.py"):
 
 os.chdir("../")
 
-#enter interactive state
-code.interact(local=dict(globals(), **locals())) 
+if(len(sys.argv) > 1):
+    args = sys.argv
+    args = args[1:]
+    for arg in args:
+        execute = arg + " "
+    execute = execute[:-1]
+    exec("print("+execute+")")
+else:
+    #enter interactive state
+    code.interact(local=dict(globals(), **locals())) 
