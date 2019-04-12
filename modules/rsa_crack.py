@@ -1,5 +1,5 @@
 def rsa_crack(cipher_text_numbers, d, n):
-    return [sam(c, d, n) for c in cipher_text_numbers]
+    return [pow(c, d, n) for c in cipher_text_numbers]
 
 registerFunction("rsa_crack", {
     "name" : "Crack RSA encrypted text",
