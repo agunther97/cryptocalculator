@@ -40,7 +40,7 @@ def fmtWrite(s, splitSearch):
         print(indent+buff)
 def registerFunction(fn, data):
     calculatorFunctions[fn]=data
-
+    
 def displayFunctions():
     sz=len(calculatorFunctions.keys())
     funcList = [None for x in range(sz)]
@@ -102,7 +102,10 @@ def help(*args):
     for arg in args:
         if len(funcName)>0:
             funcName = funcName + " "
-        funcName = funcName + arg
+        if callable(arg):
+            funcName = funcName + arg.__name__
+        else:
+            funcName = funcName + arg
     if (funcName==""):
         print("CryptoCalc")
         displayFunctions()
