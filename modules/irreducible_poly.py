@@ -19,8 +19,8 @@ def strike(text):
         result = result + c + '\u0336'
     return result
 
-def irreducible_poly(degree, field_size, fast=True, quiet=True):
-    if (quiet and (field_size<=3)):
+def irreducible_poly(degree, field_size, fast=True, verbose=False):
+    if ((not verbose) and (field_size<=3)):
         return irreducible_poly_lite(degree, field_size)
     degRange = range(degree)
     degRangeAdd = range(degree+1)
@@ -64,7 +64,7 @@ def irreducible_poly(degree, field_size, fast=True, quiet=True):
         s=s+app+"\t"
         if (i+1)%field_size==0:
             s=s[:-1]
-            if not quiet:
+            if verbose:
                 print(s)
             s=""
 
@@ -98,7 +98,7 @@ def irreducible_poly_lite(degree, field_size):
 
 registerFunction("irreducible_poly", {
     "name" : "Irreducible Polynomials over Field",
-    "arguments_short":["degree","field_size","fast=True","quiet=True"],
-    "arguments":["the degree of the polynominal", "the field size (i.e. Z mod #)","use fast algorithm? default on, only calculates leading coeff. 1 and extrapolates", "skip printing formatted table"],
+    "arguments_short":["degree","field_size","fast=True","verbose=False"],
+    "arguments":["the degree of the polynominal", "the field size (i.e. Z mod #)","use fast algorithm? default on, only calculates leading coeff. 1 and extrapolates", "print formatted table"],
     "description":"Returns the number of irreducible polynomials for a given field size"
 })
