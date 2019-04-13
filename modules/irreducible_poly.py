@@ -19,7 +19,7 @@ def irreducible_poly(degree, field_size):
             if (pow(i,degree) + poly[1]*i + poly[2]) % field_size == 0:
                 reduceable_count += 1
                 break
-    print((len(polys) - reduceable_count) * (field_size - 1))
+    return ((len(polys) - reduceable_count) * (field_size - 1))
 
 registerFunction("irreducible_poly", {
     "name" : "Find the number of irreducible polynomials for a field size",
