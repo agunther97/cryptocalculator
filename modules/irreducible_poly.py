@@ -97,7 +97,7 @@ def irreducible_poly_lite(degree, field_size):
     return ((len(polys) - reduceable_count) * (field_size - 1))
 
 registerFunction("irreducible_poly", {
-    "name" : "Find the number of irreducible polynomials for a field size",
+    "name" : "Irreducible Polynomials over Field",
     "arguments_short":["degree","field_size","fast=True","quiet=True"],
     "arguments":["the degree of the polynominal", "the field size (i.e. Z mod #)","use fast algorithm? default on, only calculates leading coeff. 1 and extrapolates", "skip printing formatted table"],
     "description":"Returns the number of irreducible polynomials for a given field size"

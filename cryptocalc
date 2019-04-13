@@ -12,16 +12,20 @@ calculatorFunctions = {}
 #   "description":"Does something lol"
 #}
 
-indent="  "
+indentStr="  "
 lineCap=80
 
-def fmtWrite(s, splitSearch):
+def fmtWrite(s, splitSearch, indent="", hangingIndent=True):
     #this splits by line length 80 on commas
     buff=""
+    cap=lineCap*1
+    hanging=not hangingIndent
+    if not hanging:
+        cap=cap-len(indent)
     while len(s)>0:
         p = s.find(splitSearch)
         if (p==-1):
-            if (len(s)+len(buff))>lineCap:
+            if (len(s)+len(buff))>cap:
                 print(buff)
                 print(s)
                 buff=""
@@ -30,14 +34,25 @@ def fmtWrite(s, splitSearch):
                 buff+=s
                 s=""
         else:
-            if (len(buff)+p)>lineCap:
-                print(indent+buff)
+            doTrim=False
+            if (len(buff)+p)>cap:
+                if hanging:
+                    buff=indent+buff
+                    doTrim=True
+                else:
+                    hanging=True
+                    cap=lineCap-len(indent)
+                print(buff)
                 buff=""
-            cut=p+3
+            cut=p+len(splitSearch)
             buff+=s[0:cut]
+            if doTrim:
+                buff=buff.lstrip()
             s=s[cut:len(s)]
     if len(buff)>0:
-        print(indent+buff)
+        if indent and hanging:
+            buff=indent+buff
+        print(buff)
 def registerFunction(fn, data):
     calculatorFunctions[fn]=data
     
@@ -70,7 +85,7 @@ def displayFunctions():
                 s=s+", "
             i=i+1
     print("Registered Functions:")
-    fmtWrite(s,"),")
+    fmtWrite(s,"),",indent=indentStr,hangingIndent=False)
     print("Use help(functionName) for more information.")
 
 def displayFunction(fn):
@@ -85,17 +100,15 @@ def displayFunction(fn):
         args=data["arguments"]
     elif "arguments_short" in data:
         args=data["arguments_short"]
-    s=indent+"Usage: " + fn + "("
+    s="Usage: " + fn + "("
     for j in range(len(args)):
         s=s+args[j]
         if j<len(args)-1:
-            s=s+","
+            s=s+", "
     s=s+")"
-    fmtWrite(s," ")
+    fmtWrite(indentStr+s," ",indent=(indentStr+indentStr))
     if "description" in data:
-        fmtWrite(indent+data["description"], " ")
-
-
+        fmtWrite(indentStr+data["description"], " ",indent=(indentStr+indentStr))
 
 def help(*args):
     funcName=""
