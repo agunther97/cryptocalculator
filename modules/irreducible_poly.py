@@ -2,8 +2,9 @@ import itertools
 
 def irreducible_poly(degree, field_size):
     polys = [1]
+    product_list = [i for i in range(field_size)]
     for i in range(degree):
-        polys = list(itertools.product(polys, [0,1,2,3,4]))
+        polys = list(itertools.product(polys, product_list))
     flat_polys = []
     for entry in polys:
         entry_str = str(entry)
