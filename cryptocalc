@@ -2,6 +2,19 @@
 
 import glob, os, code, sys, rlcompleter, readline
 
+#contants
+
+name="CryptoCode"
+indentStr="  "
+lineCap=80
+lineReplacements = {
+    "help":"help()",
+    "exit":"exit()",
+    "quit":"exit()"
+}
+welcomeBanner=name+"\n"+"Authored by Aaron Gunther and Grey Ruessler"+"\n"+"Enter \"help\" for help, or \"quit\" to quit."
+helpMsg="This is a full featured Python shell with several enhancements.\nTab completion is present, and new functions have been added.\nEnter \"help\" to get this message, or \"quit\" to quit."
+
 #set up helper func, list, etc
 calculatorFunctions = {}
 #structure:
@@ -11,9 +24,6 @@ calculatorFunctions = {}
 #   "arguments":["arg1", "arg2", "arg3"],
 #   "description":"Does something lol"
 #}
-
-indentStr="  "
-lineCap=80
 
 def fmtWrite(s, splitSearch, indent="", hangingIndent=True):
     #this splits by line length 80 on commas
@@ -120,7 +130,7 @@ def help(*args):
         else:
             funcName = funcName + arg
     if (funcName==""):
-        print("CryptoCalc")
+        print(helpMsg)
         displayFunctions()
     else:
         displayFunction(funcName)
@@ -135,11 +145,10 @@ os.chdir("../")
 
 #set up console or file/str execution
 
-strBanner = "CryptoCode\n"
 def readFunc(arg):
     line = input(arg)
-    if line=="help":
-        return "help()"
+    if line in lineReplacements:
+        line=lineReplacements[line]
     return line
 
 readline.parse_and_bind("tab:complete")
@@ -159,4 +168,4 @@ if(len(sys.argv) > 1):
         exec("print("+execute+")")
 else:
     #enter interactive state
-    code.interact(banner=strBanner, readfunc=readFunc, local=dict(globals(), **locals())) 
+    code.interact(banner=welcomeBanner, readfunc=readFunc, local=dict(globals(), **locals())) 
