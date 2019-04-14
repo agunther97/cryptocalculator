@@ -19,6 +19,14 @@ def strike(text):
         result = result + c + '\u0336'
     return result
 
+def tintTrueFalse(text, succ):
+    if succ:
+        text=tcolors.OKGREEN+text
+    else:
+        text=tcolors.FAIL+text
+    text+=tcolors.ENDC
+    return text
+
 def irreducible_poly(degree, field_size, fast=True, verbose=False):
     if ((not verbose) and (field_size<=3)):
         return irreducible_poly_lite(degree, field_size)
@@ -61,6 +69,7 @@ def irreducible_poly(degree, field_size, fast=True, verbose=False):
         app=formatPolynomial(k)
         if not v:
             app=strike(app)
+        app=tintTrueFalse(app,v)
         s=s+app+"\t"
         if (i+1)%field_size==0:
             s=s[:-1]
