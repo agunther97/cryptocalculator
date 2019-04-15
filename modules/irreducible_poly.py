@@ -107,7 +107,7 @@ def irreducible_poly_lite(degree, field_size):
 
 registerFunction("irreducible_poly", {
     "name" : "Irreducible Polynomials over Field",
-    "arguments_short":["degree","field_size","fast=True","verbose=False"],
+    "arguments_short":["deg","field","fast=True","verbose=False"],
     "arguments":["the degree of the polynominal", "the field size (i.e. Z mod #)","use fast algorithm? default on, only calculates leading coeff. 1 and extrapolates", "print formatted table"],
     "description":"Returns the number of irreducible polynomials for a given field size"
 })
