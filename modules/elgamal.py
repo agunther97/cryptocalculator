@@ -17,6 +17,8 @@ def elgamald(y,p,a):
     t=[]
     d=len(y[1])
     for j in range(0,d,1):
-        s=mod(y[1][j]*inv(pow(y[0][j],a,p),p),p)
+        y1=y[0][j]
+        y2=y[1][j]
+        s=mod(y2*inv(pow(y1,a,p),p),p)
         t.append(s)
     return t

@@ -1,5 +1,5 @@
 def rsa_d(phi_n, e):
-    return multiplicative_inverse(phi_n, e)
+    return inv(e,phi_n)
 
 registerFunction("rsa_d", {
     "name" : "Find the decryption exponential for RSA",
