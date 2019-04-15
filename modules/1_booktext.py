@@ -23,7 +23,7 @@ def ntt_book(data,segLen=3,alpha=alphabet):
         output+=segOutput
     return output
 
-def ttn_book(strv,segLen,alpha=alphabet):
+def ttn_book(strv,segLen=3,alpha=alphabet):
     invAlpha = {}
     for i in range(len(alpha)):
         invAlpha[alpha[i]]=i
@@ -46,4 +46,11 @@ registerFunction("ntt_book", {
     "arguments_short":["data","segLen=3","alpha=alphabet"],
     "arguments":["data to convert","segLen=letters per number","alphabet=list like [\"a\",\"b\",...]"],
     "description":"Converts numbers to text using the book algorithm"
+})
+
+registerFunction("ttn_book", {
+    "name" : "Text to numbers (Book)",
+    "arguments_short":["data","segLen=3","alpha=alphabet"],
+    "arguments":["data to convert","segLen=letters per number","alphabet=list like [\"a\",\"b\",...]"],
+    "description":"Converts text to numbers using the book algorithm"
 })
