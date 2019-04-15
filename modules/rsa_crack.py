@@ -8,7 +8,7 @@ def rsa_crack(data, e, n, verbose=False):
 
 registerFunction("rsa_crack", {
     "name" : "Crack RSA",
-    "arguments_short":["data","e","n"],
-    "arguments":["ciphertext number list","encryption exponent","modulous"],
+    "arguments_short":["data","e","n","verbose=False"],
+    "arguments":["ciphertext number list","encryption exponent","modulous","print commands"],
     "description":"Cracks ciphertext given e and n, returning number list"
 })
