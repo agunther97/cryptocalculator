@@ -1,4 +1,6 @@
-def ntt_book(data,alpha=alphabet,segLen=3):
+import math
+
+def ntt_book(data,segLen=3,alpha=alphabet):
     if type(data) is int:
         data = [data]
     output=""
@@ -21,9 +23,27 @@ def ntt_book(data,alpha=alphabet,segLen=3):
         output+=segOutput
     return output
 
+def ttn_book(strv,segLen,alpha=alphabet):
+    invAlpha = {}
+    for i in range(len(alpha)):
+        invAlpha[alpha[i]]=i
+    inputs = [strv[i:i+segLen] for i in range(0, len(strv), segLen)]
+    out = [None]*len(inputs)
+    for i in range(len(inputs)):
+        s=inputs[i]
+        while (len(s)<segLen):
+            s=s+"z"
+        inputs[i]=s
+        out[i]=0
+        for j in range(segLen):
+            ch=s[j]
+            if ch in invAlpha:
+                out[i]+=invAlpha[ch]*pow(len(alpha),segLen-j-1)
+    return out
+
 registerFunction("ntt_book", {
     "name" : "Numbers to text (Book)",
-    "arguments_short":["data","alpha=alphabet","segLen=3"],
-    "arguments":["data to convert","alphabet=list like [\"a\",\"b\",...]","segLen=letters per number"],
+    "arguments_short":["data","segLen=3","alpha=alphabet"],
+    "arguments":["data to convert","segLen=letters per number","alphabet=list like [\"a\",\"b\",...]"],
     "description":"Converts numbers to text using the book algorithm"
 })
