@@ -1,5 +1,14 @@
+def elgamal_alpha(p):
+    for i in range(1,p):
+        if is_primitive_root(i,p):
+            return i
+    return -1
+
+def elgamal_beta(p,alpha,a):
+    return pow(alpha,a,p)
+
 def elgamal_encrypt(x,p,alpha,a):
-    return elgamale(x,p,alpha,pow(alpha,a,p))
+    return elgamale(x,p,alpha,elgamal_beta(p,alpha,a))
 
 def elgamale(x,p,alpha,beta):
     lx=x
