@@ -10,6 +10,9 @@ def elgamal_beta(p,alpha,a):
 def elgamal_encrypt(x,p,alpha,a):
     return elgamale(x,p,alpha,elgamal_beta(p,alpha,a))
 
+def elgamal_decrypt(y,p,a):
+    return elgamald(y,p,a)
+
 def elgamale(x,p,alpha,beta):
     lx=x
     if type(x)==int:
