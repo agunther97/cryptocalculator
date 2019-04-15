@@ -1,20 +1,12 @@
 #!/usr/bin/env python
 
+#
+#initial config
+#
+
 import glob, os, code, sys, rlcompleter, readline
 
-#contants
-
-name="CryptoCode"
-indentStr="  "
-lineCap=80
-lineReplacements = {
-    "help":"help()",
-    "exit":"exit()",
-    "quit":"exit()"
-}
-welcomeBanner=name+"\n"+"Authored by Aaron Gunther and Grey Ruessler"+"\n"+"Enter \"help\" for help, or \"quit\" to quit."
-helpMsg="This is a full featured Python shell with several enhancements.\nTab completion is present, and new functions have been added.\nEnter \"help\" to get this message, or \"quit\" to quit."
-#load enums
+#load enums and constants
 
 os.chdir("./enums")
 
@@ -23,17 +15,14 @@ for file in glob.glob("*.py"):
 
 os.chdir("../")
 
-
+#
 #set up helper func, list, etc
-calculatorFunctions = {}
-#structure:
-#id:{
-#   "name":"Readable Name",
-#   "arguments_short":["x","y","z"],
-#   "arguments":["arg1", "arg2", "arg3"],
-#   "description":"Does something lol"
-#}
+#
 
+#dictionary linking function data to name
+calculatorFunctions = {}
+
+#formatted print to limit width of strings
 def fmtWrite(s, splitSearch, indent="", hangingIndent=True):
     #this splits by line length 80 on commas
     buff=""
@@ -72,9 +61,12 @@ def fmtWrite(s, splitSearch, indent="", hangingIndent=True):
         if indent and hanging:
             buff=indent+buff
         print(buff)
+
+#convenience func to register data in the dictionary
 def registerFunction(fn, data):
     calculatorFunctions[fn]=data
-    
+
+#list functions
 def displayFunctions():
     sz=len(calculatorFunctions.keys())
     funcList = [None for x in range(sz)]
@@ -107,6 +99,7 @@ def displayFunctions():
     fmtWrite(s,"),",indent=indentStr,hangingIndent=False)
     print("Use help(functionName) for more information.")
 
+#display function info
 def displayFunction(fn):
     data=calculatorFunctions[fn]
 
@@ -129,6 +122,7 @@ def displayFunction(fn):
     if "description" in data:
         fmtWrite(indentStr+data["description"], " ",indent=(indentStr+indentStr))
 
+#either display general help or specifics for a function, depending on argument
 def help(*args):
     funcName=""
     for arg in args:
@@ -152,16 +146,28 @@ for file in glob.glob("*.py"):
 
 os.chdir("../")
 
+#
 #set up console or file/str execution
+#
 
+#override certain strings with custom ones
 def readFunc(arg):
-    line = input(arg)
-    if line in lineReplacements:
-        line=lineReplacements[line]
+    line = input(arg).strip()
+    if line in shellReplacements:
+        line=shellReplacements[line]
+    if line.find("help")!=-1 and line.find("(")>=line.find(")"):
+        lineTab = line.split(" ")
+        if len(lineTab)==2:
+            lineTab[1]=lineTab[1].replace("(","")
+            if lineTab[0]=="help" and lineTab[1] in calculatorFunctions:
+                line="help("+lineTab[1]+")"
+
     return line
 
+#enable tab completion
 readline.parse_and_bind("tab:complete")
 
+#if we have args, either execute arbitary code, or execute a file with -f
 if(len(sys.argv) > 1):
     args = sys.argv
     args = args[1:]
