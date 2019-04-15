@@ -6,6 +6,6 @@ def rsa_phi(p,q,verbose=False):
 registerFunction("rsa_phi", {
     "name" : "Find PHI(n) for RSA",
     "arguments_short":["p","q","verbose=False"],
-    "arguments":["p of rsa (rsa n = p*q)", "q of rsa (rsa n = p*q)","print command"],
+    "arguments":["p of rsa (rsa n = p*q)", "q of rsa (rsa n = p*q)","print commands"],
     "description":"Returns phi_n where phi_n = (p-1) * (q-1) for RSA"
 })

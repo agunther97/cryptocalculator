@@ -6,6 +6,6 @@ def rsa_n(p,q,verbose=False):
 registerFunction("rsa_n", {
     "name" : "Find n for RSA",
     "arguments_short":["p","q","verbose=False"],
-    "arguments":["p of rsa (rsa n = p*q)", "q of rsa (rsa n = p*q)","print command"],
+    "arguments":["p of rsa (rsa n = p*q)", "q of rsa (rsa n = p*q)","print commands"],
     "description":"Returns n where n = (p) * (q) for RSA"
 })
