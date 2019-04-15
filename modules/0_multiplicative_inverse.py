@@ -17,6 +17,9 @@ def multiplicative_inverse(a,b):
         r = a_0 - (q * b_0)
     return t
 
+def inv(a,b):
+    return multiplicative_inverse(a,b)
+
 registerFunction("multiplicative_inverse", {
     "name" : "Find multiplicative inverse",
     "arguments_short":["a", "b"],
