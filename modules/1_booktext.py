@@ -1,4 +1,4 @@
-def nttbook(data,alpha=alphabet,segLen=3):
+def ntt_book(data,alpha=alphabet,segLen=3):
     if type(data) is int:
         data = [data]
     output=""
@@ -20,3 +20,10 @@ def nttbook(data,alpha=alphabet,segLen=3):
             segOutput+=char
         output+=segOutput
     return output
+
+registerFunction("ntt_book", {
+    "name" : "Numbers to text (Book)",
+    "arguments_short":["data","alpha=alphabet","segLen=3"],
+    "arguments":["data to convert","alphabet=list like [\"a\",\"b\",...]","segLen=letters per number"],
+    "description":"Converts numbers to text using the book algorithm"
+})
