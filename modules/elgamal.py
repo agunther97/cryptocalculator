@@ -35,8 +35,13 @@ def elgamale(x,p,alpha,beta,k=None,verbose=False):
         w[0][j]=pow(alpha,k,p)
         w[1][j]=mod(lx[j]*pow(beta,k,p),p)
         if verbose:
-            print(indentStr+"y1=sam("+str(alpha)+","+str(k)+","+str(p)+")=" + str(w[0][j]))
-            print(indentStr+"y2=mod("+str(lx[j])+"*sam("+str(beta)+","+str(k)+","+str(p)+"),"+str(p)+")=" + str(w[1][j]))
+            if j==0 and d==1:
+                print(indentStr+"y"+subscript(1)+"=sam("+str(alpha)+","+str(k)+","+str(p)+")=" + str(w[0][j]))
+                print(indentStr+"y"+subscript(2)+"=mod("+str(lx[j])+"*sam("+str(beta)+","+str(k)+","+str(p)+"),"+str(p)+")=" + str(w[1][j]))
+            else:
+                subs=subscript(j+1)
+                print(indentStr+"y1"+subs+"=sam("+str(alpha)+","+str(k)+","+str(p)+")=" + str(w[0][j]))
+                print(indentStr+"y2"+subs+"=mod("+str(lx[j])+"*sam("+str(beta)+","+str(k)+","+str(p)+"),"+str(p)+")=" + str(w[1][j]))
         if resetK:
             k=None
     return w
@@ -48,7 +53,7 @@ def elgamald(y,p,a,verbose=False):
         y1=y[0][j]
         y2=y[1][j]
         if verbose:
-            print("x_"+str(j)+"=mod("+str(y2)+"*inv(sam("+str(y1)+","+str(a)+","+str(p)+"),"+str(p)+"),"+str(p)+")")
+            print("x"+subscript(j+1)+"=mod("+str(y2)+"*inv(sam("+str(y1)+","+str(a)+","+str(p)+"),"+str(p)+"),"+str(p)+")")
         s=mod(y2*inv(pow(y1,a,p),p),p)
         t.append(s)
     return t
