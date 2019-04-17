@@ -12,14 +12,19 @@ def elgamal_alpha(p,verbose=False):
 
 def elgamal_beta(p,alpha,a,verbose=False):
     if verbose:
-        print("beta=sam("+str(alpha)+","+str(a)+","+str(p)+")="+str(pow(alpha,a,p)))
+        print("beta=sam(alpha,a,p)=sam("+str(alpha)+","+str(a)+","+str(p)+")="+str(pow(alpha,a,p)))
     return pow(alpha,a,p)
 
 def elgamal_encrypt(x,p,alpha,a,k=None,verbose=False):
-    return elgamale(x,p,alpha,elgamal_beta(p,alpha,a),k=k,verbose=verbose)
+    return elgamale(x,p,alpha,elgamal_beta(p,alpha,a,verbose=verbose),k=k,verbose=verbose)
 
 def elgamal_decrypt(y,p,a,verbose=False):
     return elgamald(y,p,a,verbose=verbose)
+
+def elgamal_k(p,a,verbose=True):
+    if verbose:
+        print("minimum effective k is ceil(ln(p)/ln(a))=ceil("+str(ln(p))+"/"+str(ln(a))+")="+str(ceil(ln(p)/ln(a))))
+    return ceil(ln(p)/ln(a))
 
 def elgamale(x,p,alpha,beta,k=None,verbose=False):
     lx=x
@@ -36,12 +41,12 @@ def elgamale(x,p,alpha,beta,k=None,verbose=False):
         w[1][j]=mod(lx[j]*pow(beta,k,p),p)
         if verbose:
             if j==0 and d==1:
-                print(indentStr+"y"+subscript(1)+"=sam("+str(alpha)+","+str(k)+","+str(p)+")=" + str(w[0][j]))
-                print(indentStr+"y"+subscript(2)+"=mod("+str(lx[j])+"*sam("+str(beta)+","+str(k)+","+str(p)+"),"+str(p)+")=" + str(w[1][j]))
+                print(indentStr+"y"+subscript(1)+"=sam(alpha,k,p)=sam("+str(alpha)+","+str(k)+","+str(p)+")=" + str(w[0][j]))
+                print(indentStr+"y"+subscript(2)+"=x*sam(beta,k,p)=mod("+str(lx[j])+"*sam("+str(beta)+","+str(k)+","+str(p)+"),"+str(p)+")=" + str(w[1][j]))
             else:
                 subs=subscript(j+1)
-                print(indentStr+"y1"+subs+"=sam("+str(alpha)+","+str(k)+","+str(p)+")=" + str(w[0][j]))
-                print(indentStr+"y2"+subs+"=mod("+str(lx[j])+"*sam("+str(beta)+","+str(k)+","+str(p)+"),"+str(p)+")=" + str(w[1][j]))
+                print(indentStr+"y1"+subs+"=sam(alpha,k,p)=sam("+str(alpha)+","+str(k)+","+str(p)+")=" + str(w[0][j]))
+                print(indentStr+"y2"+subs+"=x*sam(beta,k,p)=mod("+str(lx[j])+"*sam("+str(beta)+","+str(k)+","+str(p)+"),"+str(p)+")=" + str(w[1][j]))
         if resetK:
             k=None
     return w
@@ -53,7 +58,7 @@ def elgamald(y,p,a,verbose=False):
         y1=y[0][j]
         y2=y[1][j]
         if verbose:
-            print("x"+subscript(j+1)+"=mod("+str(y2)+"*inv(sam("+str(y1)+","+str(a)+","+str(p)+"),"+str(p)+"),"+str(p)+")")
+            print("x"+subscript(j+1)+"=mod(y2"+subscript(j+1)+"*inv(sam(y1"+subscript(j+1)+",a,p),p),p)=mod("+str(y2)+"*inv(sam("+str(y1)+","+str(a)+","+str(p)+"),"+str(p)+"),"+str(p)+")")
         s=mod(y2*inv(pow(y1,a,p),p),p)
         t.append(s)
     return t
