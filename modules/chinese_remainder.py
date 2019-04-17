@@ -15,7 +15,7 @@ def chinese_remainder(number_values, mod_values, verbose=False):
     if verbose:
         print('Calculating M as: ' + '*'.join(map(str, mod_values)) + ' = ' + str(M))
         print('Calculating M sub 1, ..., M sub N as M sub i = M/mod_value[i]: ' + ','.join(map(str, m_subs)))
-        print ('Calculating Y sub 1, ...., Y sub N as (M sub i)^-1 mod mod_value[i]: ' + ','.join(map(str, y_subs)))
+        print ('Calculating Y sub 1, ..., Y sub N as (M sub i)^-1 mod mod_value[i]: ' + ','.join(map(str, y_subs)))
         x_calc_string = x_calc_string[:-3]
         print (x_calc_string + ' = ' + str(x))
     return x
