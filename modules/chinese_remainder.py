@@ -1,6 +1,17 @@
 from functools import reduce
 
-def chinese_remainder(number_values, mod_values, verbose=False):
+def chinese_remainder(number_values, mod_values=None, verbose=False):
+    if (mod_values is None):
+        if (type(number_values[0])==tuple):
+            mod_values=[number_values[i][1] for i in range(len(number_values))]
+            number_values=[number_values[i][0] for i in range(len(number_values))]
+        elif (type(number_values[0])==list):
+            if len(number_values[0])>2: #then it's a row where collumns are number values
+                mod_values=[number_values[1][i] for i in range(len(number_values[0]))]
+                number_values=[number_values[0][i] for i in range(len(number_values[0]))]
+            else:
+                mod_values=[number_values[i][1] for i in range(len(number_values))]
+                number_values=[number_values[i][0] for i in range(len(number_values))]
     M = reduce((lambda x, y: x * y), mod_values)
     m_subs = list(map((lambda x: M/x), mod_values))
     y_subs = []
