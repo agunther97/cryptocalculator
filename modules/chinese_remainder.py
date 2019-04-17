@@ -18,17 +18,24 @@ def chinese_remainder(number_values, mod_values=None, verbose=False):
     for i in range(len(m_subs)):
         y_subs.append(int(multiplicative_inverse(m_subs[i], mod_values[i])))
     x = 0
-    x_calc_string = 'Calculating X as '
+    x_calc_string = 'x='
     for i in range(len(number_values)):
         x += number_values[i]*m_subs[i]*y_subs[i]
-        x_calc_string += str(number_values[i]) + ' * ' + str(m_subs[i]) + ' * ' + str(y_subs[i]) + ' + '
+        x_calc_string += str(number_values[i]) + '*' + str(m_subs[i]) + '*' + str(y_subs[i]) + ' + '
     x = int(x%M)
     if verbose:
         print('Calculating M as: ' + '*'.join(map(str, mod_values)) + ' = ' + str(M))
-        print('Calculating M sub 1, ..., M sub N as M sub i = M/mod_value[i]: ' + ','.join(map(str, m_subs)))
-        print ('Calculating Y sub 1, ..., Y sub N as (M sub i)^-1 mod mod_value[i]: ' + ','.join(map(str, y_subs)))
+        #print('Calculating M sub 1, ..., M sub N as M sub i = M/mod_value[i]: ' + ','.join(map(str, m_subs)))
+        for i in range(len(m_subs)):
+            sub=subscript(i+1)
+            print("Calculating M"+sub+"=M/m"+sub+"="+str(M)+"/"+str(mod_values[i])+"="+str(m_subs[i]))
+        for i in range(len(y_subs)):
+            sub=subscript(i+1)
+            print("Calculating y"+subscript(i+1)+"=inv(M"+sub+",m"+sub+")=inv("+str(m_subs[i])+","+str(mod_values[i])+")="+str(y_subs[i]))
+        #print ('Calculating Y sub 1, ..., Y sub N as (M sub i)^-1 mod mod_value[i]: ' + ','.join(map(str, y_subs)))
         x_calc_string = x_calc_string[:-3]
-        print (x_calc_string + ' = ' + str(x))
+        print("Calculating x as sum of x_n*M_n*y_n ...")
+        print(x_calc_string + '=' + str(x))
     return x
 
 registerFunction("chinese_remainder", {
