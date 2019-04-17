@@ -11,14 +11,14 @@ def chinese_remainder(number_values, mod_values, verbose=False):
     for i in range(len(number_values)):
         x += number_values[i]*m_subs[i]*y_subs[i]
         x_calc_string += str(number_values[i]) + ' * ' + str(m_subs[i]) + ' * ' + str(y_subs[i]) + ' + '
-    x = x%M
+    x = int(x%M)
     if verbose:
         print('Calculating M as: ' + '*'.join(map(str, mod_values)) + ' = ' + str(M))
         print('Calculating M sub 1, ..., M sub N as ' + ','.join(map(str, m_subs)))
         print ('Calculating Y sub 1, ...., Y sub N as ' + ','.join(map(str, y_subs)))
         x_calc_string = x_calc_string[:-3]
-        print (x_calc_string + ' = ' + str(int(x)))
-    return int(x)
+        print (x_calc_string + ' = ' + str(x))
+    return x
 
 registerFunction("chinese_remainder", {
     "name" : "Solves chinese remainder theorem for a set of congruences",
