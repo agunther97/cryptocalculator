@@ -56,4 +56,4 @@ data=str5_2.replace("\n"," ").replace("\r","").split(" ")
 for i in range(len(data)):
     data[i]=int(data[i])
 
-print(ntt_book(rsa_crack(data,b2,n2)))
+print(ntt_book(rsa_crack(data,n2,b2)))

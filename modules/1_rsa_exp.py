@@ -1,4 +1,4 @@
-def rsa_encrypt(plaintext_numbers, e, n, verbose=False):
+def rsa_encrypt(plaintext_numbers, n, e, verbose=False):
     if type(plaintext_numbers) is int:
         plaintext_numbers = [plaintext_numbers]
     r=[pow(p, e, n) for p in plaintext_numbers]
@@ -8,7 +8,7 @@ def rsa_encrypt(plaintext_numbers, e, n, verbose=False):
             print("y=sam("+str(p)+","+str(e)+","+str(n)+")="+str(r))
     return r
 
-def rsa_decrypt(ciphertext_numbers, d, n, verbose=False):
+def rsa_decrypt(ciphertext_numbers, n, d, verbose=False):
     if type(ciphertext_numbers) is int:
         ciphertext_numbers = [ciphertext_numbers]
     r=[pow(p, d, n) for p in ciphertext_numbers]
@@ -20,14 +20,14 @@ def rsa_decrypt(ciphertext_numbers, d, n, verbose=False):
 
 registerFunction("rsa_encrypt", {
     "name" : "Encrypt data with RSA",
-    "arguments_short":["data","e","n","verbose=False"],
+    "arguments_short":["data","n","e","verbose=False"],
     "arguments":["plaintext list in numbers", "encryption exponent e", "mod value", "print commands"],
     "description":"Returns the ciphertext in numbers for a given plaintext"
 })
 
 registerFunction("rsa_decrypt", {
     "name" : "Decrypt RSA encrypted text",
-    "arguments_short":["data","d","n","verbose=False"],
+    "arguments_short":["data","n","d","verbose=False"],
     "arguments":["ciphertext list in numbers", "decryption exponent d", "mod value", "print commands"],
     "description":"Returns the plaintext in numbers of RSA encrypted text"
 })
