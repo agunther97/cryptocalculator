@@ -63,6 +63,53 @@ def elgamald(y,p,a,verbose=False):
         t.append(s)
     return t
 
+def elgamal_crack_a(p, alpha, beta):
+    m=ceil(sqrt(p))
+    t1={}
+    t2={}
+    for j in range(1,m):
+        t1[j]=pow(alpha,m*j,p)
+    for i in range(0,m):
+        t2[i]=mod(beta*pow(inv(alpha,p),i,p),p)
+
+    i_srch=-1
+    j_srch=-1
+    ret=None
+    for i in range(0,m):
+        for j in range(1,m):
+            if t1[j]==t2[i]:
+                i_srch=i
+                j_srch=j
+                ret=mod(m*j+i,p)
+                break
+    
+    print("t1=")
+    s=""
+    for j in range(1,m):
+        s+=tintTrueFalse(str(j),j==j_srch)+"\t"
+    s=s+"\n"
+    for j in range(1,m):
+        s+=tintTrueFalse(str(t1[j]),j==j_srch)+"\t"
+    print(s)
+    print("\nt2=")
+    s=""
+    for i in range(0,m):
+        s+=tintTrueFalse(str(i),i==i_srch)+"\t"
+    s=s+"\n"
+    for i in range(0,m):
+        s+=tintTrueFalse(str(t2[i]),i==i_srch)+"\t"
+    print(s)
+    print("\n")
+
+    if not (ret is None):
+        i=i_srch
+        j=j_srch
+        print("t1"+subscript(j)+"="+str(t1[j]))
+        print("t2"+subscript(i)+"="+str(t2[i]))
+        print("match found. thus:")
+        print("a=mod(m*j+i,p)=mod("+str(m)+"*"+str(j)+"+"+str(i)+","+str(p)+")="+str(ret))
+        return ret
+
 registerFunction("elgamal_alpha", {
     "name" : "Elgamal Generate Alpha",
     "arguments_short":["p","verbose=False"],

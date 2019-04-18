@@ -2,6 +2,13 @@ def upper(s):
     return s.upper()
 def lower(s):
     return s.lower()
+def tintTrueFalse(text, succ):
+    if succ:
+        text=tcolors.OKGREEN+text
+    else:
+        text=tcolors.FAIL+text
+    text+=tcolors.ENDC
+    return text
 
 registerFunction("upper", {
     "name" : "Uppercase",
