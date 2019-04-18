@@ -21,13 +21,13 @@ def rsa_decrypt(ciphertext_numbers, n, d, verbose=False):
 registerFunction("rsa_encrypt", {
     "name" : "Encrypt data with RSA",
     "arguments_short":["data","n","e","verbose=False"],
-    "arguments":["plaintext list in numbers", "encryption exponent e", "mod value", "print commands"],
+    "arguments":["plaintext list in numbers", "mod value", "encryption exponent e", "print commands"],
     "description":"Returns the ciphertext in numbers for a given plaintext"
 })
 
 registerFunction("rsa_decrypt", {
     "name" : "Decrypt RSA encrypted text",
     "arguments_short":["data","n","d","verbose=False"],
-    "arguments":["ciphertext list in numbers", "decryption exponent d", "mod value", "print commands"],
+    "arguments":["ciphertext list in numbers", "mod value", "decryption exponent d", "print commands"],
     "description":"Returns the plaintext in numbers of RSA encrypted text"
 })

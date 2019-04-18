@@ -1,4 +1,4 @@
-def rsa_crack(data, e, n, verbose=False):
+def rsa_crack(data, n, e, verbose=False):
     pqtup=rsa_pq(n,verbose=verbose)
     p=pqtup[0]
     q=pqtup[1]
@@ -8,7 +8,7 @@ def rsa_crack(data, e, n, verbose=False):
 
 registerFunction("rsa_crack", {
     "name" : "Crack RSA",
-    "arguments_short":["data","e","n","verbose=False"],
-    "arguments":["ciphertext number list","encryption exponent","modulous","print commands"],
+    "arguments_short":["data","n","e","verbose=False"],
+    "arguments":["ciphertext number list","modulous","encryption exponent","print commands"],
     "description":"Cracks ciphertext given e and n, returning number list"
 })
