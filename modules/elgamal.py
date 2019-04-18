@@ -63,7 +63,7 @@ def elgamald(y,p,a,verbose=False):
         t.append(s)
     return t
 
-def elgamal_crack_a(p, alpha, beta):
+def elgamal_crack_a(p, alpha, beta, verbose=False):
     m=ceil(sqrt(p))
     t1={}
     t2={}
@@ -82,32 +82,33 @@ def elgamal_crack_a(p, alpha, beta):
                 j_srch=j
                 ret=mod(m*j+i,p)
                 break
-    
-    print("t1=")
-    s=""
-    for j in range(1,m):
-        s+=tintTrueFalse(str(j),j==j_srch)+"\t"
-    s=s+"\n"
-    for j in range(1,m):
-        s+=tintTrueFalse(str(t1[j]),j==j_srch)+"\t"
-    print(s)
-    print("\nt2=")
-    s=""
-    for i in range(0,m):
-        s+=tintTrueFalse(str(i),i==i_srch)+"\t"
-    s=s+"\n"
-    for i in range(0,m):
-        s+=tintTrueFalse(str(t2[i]),i==i_srch)+"\t"
-    print(s)
-    print("\n")
+    if verbose:
+        print("t1=")
+        s=""
+        for j in range(1,m):
+            s+=tintTrueFalse(str(j),j==j_srch)+"\t"
+        s=s+"\n"
+        for j in range(1,m):
+            s+=tintTrueFalse(str(t1[j]),j==j_srch)+"\t"
+        print(s)
+        print("\nt2=")
+        s=""
+        for i in range(0,m):
+            s+=tintTrueFalse(str(i),i==i_srch)+"\t"
+        s=s+"\n"
+        for i in range(0,m):
+            s+=tintTrueFalse(str(t2[i]),i==i_srch)+"\t"
+        print(s)
+        print("\n")
 
     if not (ret is None):
         i=i_srch
         j=j_srch
-        print("t1"+subscript(j)+"="+str(t1[j]))
-        print("t2"+subscript(i)+"="+str(t2[i]))
-        print("match found. thus:")
-        print("a=mod(m*j+i,p)=mod("+str(m)+"*"+str(j)+"+"+str(i)+","+str(p)+")="+str(ret))
+        if verbose:
+            print("t1"+subscript(j)+"="+str(t1[j]))
+            print("t2"+subscript(i)+"="+str(t2[i]))
+            print("match found. thus:")
+            print("a=mod(m*j+i,p)=mod("+str(m)+"*"+str(j)+"+"+str(i)+","+str(p)+")="+str(ret))
         return ret
 
 registerFunction("elgamal_alpha", {
@@ -150,4 +151,11 @@ registerFunction("elgamal_decrypt", {
     "arguments_short":["data","p","a"],
     "arguments":["ciphertext number list","modulous","a"],
     "description":"Computes plaintext using Elgamal decryption"
+})
+
+registerFunction("elgamal_crack_a", {
+    "name" : "Elgamal Crack A",
+    "arguments_short":["p","alpha","beta","verbose=False"],
+    "arguments":["modulous","alpha","beta","print directions"],
+    "description":"Computes a using table crack method"
 })
