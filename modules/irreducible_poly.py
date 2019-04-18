@@ -35,6 +35,7 @@ def irreducible_poly(degree, field_size, fast=True, verbose=False):
     fieldRange = range(field_size)
 
     results = {}
+    resultsN = {}
     resultsTable = [{} for i in range(field_size)]
     product_list = [i for i in range(field_size)]
     product_list_f = product_list.copy()
@@ -49,12 +50,14 @@ def irreducible_poly(degree, field_size, fast=True, verbose=False):
     polys=list(itertools.product(*entries))
     for poly in polys:
         results[poly]=True
+        resultsN[poly]=None
         for x in fieldRange:
             total=0
             for i in degRangeAdd:
                 total+=(pow(x,degree-i)*poly[i])
             if (total%field_size)==0:
                 results[poly]=False
+                resultsN[poly]=x
                 break
     resKeys = results.keys()
     for i in degRange:
@@ -67,6 +70,9 @@ def irreducible_poly(degree, field_size, fast=True, verbose=False):
         k=resKeys[i]
         v=results[k]
         app=formatPolynomial(k)
+        if resultsN[k] is None:
+            resultsN[k]="X"
+        app=app+"("+str(resultsN[k])+")"
         if not v:
             app=strike(app)
         app=tintTrueFalse(app,v)
