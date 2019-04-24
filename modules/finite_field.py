@@ -16,8 +16,8 @@ def dispAr(ar):
                 s+=str(ar[i])+"x^"+str(len(ar)-i-1)+"+"
     print(s[:-1])
 def field_gen(poly,field):
-    print("input:")
-    dispAr(poly)
+    #print("input:")
+    #dispAr(poly)
     degree=len(poly)-1
     powers={}
     subpoly=[None]*(degree+1)
@@ -41,11 +41,7 @@ def field_gen(poly,field):
         for k,v in powers.items():
             if k==index:
                 continue
-            eq=True
-            for x in range(len(v)):
-                if v[x]!=tmppoly[x]:
-                    eq=False
-            if eq:
+            if v==tmppoly:
                 bk=True
                 break
         if bk:
