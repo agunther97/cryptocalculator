@@ -1,5 +1,3 @@
-#format:
-#poly=[coeff_0,coeff_x,coeff_x2,...]
 def modAr(ar,field):
     for i in range(len(ar)):
         ar[i]=mod(ar[i],field)
@@ -47,3 +45,5 @@ def field_gen(poly,field):
         if bk:
             break
     return powers
+def finite_field(poly,field):
+    return field_gen(poly,field)

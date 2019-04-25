@@ -33,6 +33,7 @@ def multiply_polynomial(poly1,poly2,modu=None):
     while len(polyList)>0 and polyList[0]==0:
         polyList.pop(0)
     return polyList
+
 def degree_polynomial(poly):
     tmp=poly.copy()
     while len(tmp)>0 and tmp[0]==0:
@@ -43,8 +44,6 @@ def factor_polynomial(poly,field,verbose=False):
     degree=len(poly)-1
     attempts={}
     tabl=genTable(field,ceil((degree+2)/2))
-    one=[0]*len(tabl[0])
-    one[len(one)-1]=1
     for i in range(len(tabl)):
         for j in range(len(tabl)):
             if i in attempts:

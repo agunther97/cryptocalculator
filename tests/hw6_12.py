@@ -33,14 +33,12 @@ for i in range(len(alphabet)):
 fields=field_gen(poly,field)
 fieldsMod={}
 
-def LUT(ar,val):
-    for k,v in ar.items():
-        if v==val:
-            return k
-
 for k in fields.keys():
     fieldsMod[k%26]=fields[k]
 
+print("Field Exponents:")
+for k,v in letterField.items():
+    print(k+"=x^"+str(mod(LUT(fields,v),26))+"="+format_polynomial(v))
 outStr=""
 for pair in pairs:
     y1=pair[0].lower()
@@ -48,5 +46,7 @@ for pair in pairs:
     degree1=LUT(fieldsMod,letterField[y1])
     degree2=LUT(fieldsMod,letterField[y2])
     decryptDeg=mod(degree2+(len(alphabet)-degree1*elg_a),len(alphabet))
-    outStr=outStr+LUT(letterField,fieldsMod[decryptDeg])
+    letter=LUT(letterField,fieldsMod[decryptDeg])
+    print("y1="+y1+"=x^"+str(degree1)+"|y2="+y2+"=x^"+str(degree2)+"|pt=x^mod("+str(degree2)+"+"+str(len(alphabet))+"-"+str(degree1)+"*"+str(elg_a)+","+str(len(alphabet))+")=x^"+str(decryptDeg)+"="+letter)
+    outStr=outStr+letter
 print(outStr)
