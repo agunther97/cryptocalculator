@@ -6,7 +6,7 @@ polies=[
 for poly in polies:
     print("Attempting to reduce polynomial "+format_polynomial(poly))
     s="Result: "
-    res=factor_polynomial(poly,2)
+    res=factor_polynomial(poly,2,True)
     if res is None:
         s+="None"
     else:

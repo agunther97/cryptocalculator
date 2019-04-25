@@ -43,6 +43,8 @@ def factor_polynomial(poly,field,verbose=False):
     degree=len(poly)-1
     attempts={}
     tabl=genTable(field,ceil((degree+2)/2))
+    one=[0]*len(tabl[0])
+    one[len(one)-1]=1
     for i in range(len(tabl)):
         for j in range(len(tabl)):
             if i in attempts:
@@ -57,6 +59,8 @@ def factor_polynomial(poly,field,verbose=False):
                     continue
             p1=tabl[i]
             p2=tabl[j]
+            if degree_polynomial(p1)==0 or degree_polynomial(p2)==0:
+                continue
             if degree_polynomial(p1)+degree_polynomial(p2)==degree_polynomial(poly):
                 mul=multiply_polynomial(p1,p2,field)
                 eq=(mul==poly)
