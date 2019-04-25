@@ -13,12 +13,6 @@ def formatPolynomial(poly):
     s=s+str(poly[l-1])
     return s
 
-def strike(text):
-    result = ''
-    for c in text:
-        result = result + c + '\u0336'
-    return result
-
 def irreducible_poly(degree, field_size, fast=True, verbose=False):
     if ((not verbose) and (field_size<=3)):
         return irreducible_poly_lite(degree, field_size)

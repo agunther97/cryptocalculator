@@ -9,6 +9,11 @@ def tintTrueFalse(text, succ):
         text=tcolors.FAIL+text
     text+=tcolors.ENDC
     return text
+def strike(text):
+    result = ''
+    for c in text:
+        result = result + c + '\u0336'
+    return result
 
 registerFunction("upper", {
     "name" : "Uppercase",
