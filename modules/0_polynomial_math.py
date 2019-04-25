@@ -79,12 +79,17 @@ def format_polynomial(poly):
         s=""
         for i in range(len(ar)):
             if (ar[i]!=0):
+                xpow=""
+                if (len(ar)-i-1)==1:
+                    xpow="x"
+                else:
+                    xpow="x^"+str(len(ar)-i-1)
                 if i==len(ar)-1:
                     s+=str(ar[i])+" "
                 else:
                     if ar[i]==1:
-                        s+="x^"+str(len(ar)-i-1)+"+"
+                        s+=xpow+"+"
                     else:
-                        s+=str(ar[i])+"x^"+str(len(ar)-i-1)+"+"
+                        s+=str(ar[i])+xpow+"+"
         out+=(s[:-1])+"\n"
     return out[:-1]
