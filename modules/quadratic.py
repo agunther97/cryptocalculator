@@ -9,18 +9,22 @@ def jc_factors(nr):
             i = i + 1
     return factors
 
-def eulerCriterion(a,p):
+def eulerCriterion(a,p,verbose=False):
+    ret = None
     if (a%p==0):
-        return 0
+        ret = 0
     val=pow(a,int((p-1)/2),p)
     if (val==1):
-        return 1
+        ret = 1
     if (val==0):
-        return 0
+        ret = 0
     if (val==p-1):
-        return -1
+        ret = -1
+    if verbose:
+        print(str(a)+"/"+str(p)+"="+str(a)+"^(("+str(p)+"-1)/2)="+str(ret))
+    return ret
 
-def jacobi(x,n):
+def jacobi(x,n,verbose=False):
     factors = jc_factors(n)
     factorsCondensed={}
     for fac in factors:
@@ -28,8 +32,9 @@ def jacobi(x,n):
             factorsCondensed[fac]+=1
         else:
             factorsCondensed[fac]=1
-    print("factors:")
-    print(factorsCondensed)
+    if verbose:
+        print("factors:")
+        print(factorsCondensed)
     if x%n==0:
         return 0
     res=1
@@ -38,20 +43,25 @@ def jacobi(x,n):
     for fac in factorsCondensed.keys():
         xmod=x%fac
         exp=factorsCondensed[fac]
-        out+="("+str(xmod)+"/"+str(fac)+")"
-        if (exp>1):
-            out+=superscript(exp)
-        out+="*"
         crit=eulerCriterion(xmod,fac)
-        outPt2+="("+str(crit)+")"
-        if (exp>1):
-            outPt2+=superscript(exp)
-        outPt2+="*"
+        if verbose:
+            out+="("+str(xmod)+"/"+str(fac)+")"
+            outPt2+="("+str(crit)+")"
+            if (exp>1):
+                out+=superscript(exp)
+                outPt2+=superscript(exp)
+            out+="*"
+            outPt2+="*"
         if (xmod!=0):
             res*=pow(crit,exp)
-    out=out[:-1]
-    outPt2=outPt2[:-1]
-    out+="="+outPt2
-    out+="="+str(res)
-    print(out)
+    if verbose:
+        out=out[:-1]
+        outPt2=outPt2[:-1]
+        print(out)
+        for fac in factorsCondensed.keys():
+            xmod=x%fac
+            exp=factorsCondensed[fac]
+            crit=eulerCriterion(xmod,fac,True)
+        outPt2+="="+str(res)
+        print(out+"="+outPt2)
     return res
