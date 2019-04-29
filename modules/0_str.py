@@ -14,7 +14,14 @@ def strike(text):
     for c in text:
         result = result + c + '\u0336'
     return result
-
+def subscript(strv):
+    if type(strv)!=str:
+        strv=str(strv)
+    return strv.translate(SUBSCRIPT)
+def superscript(strv):
+    if type(strv)!=str:
+        strv=str(strv)
+    return strv.translate(SUPERSCRIPT)
 registerFunction("upper", {
     "name" : "Uppercase",
     "arguments_short":["s"],
