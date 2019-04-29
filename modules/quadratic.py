@@ -9,7 +9,7 @@ def jc_factors(nr):
             i = i + 1
     return factors
 
-def eulerCriterion(a,p,verbose=False):
+def euler_criterion(a,p,verbose=False):
     ret = None
     if (a%p==0):
         ret = 0
@@ -40,13 +40,15 @@ def jacobi(x,n,verbose=False):
     if x%n==0:
         return 0
     res=1
-    out=str(x)+"/"+str(n)+"="
+    out=""
+    if composite:
+        out=str(x)+"/"+str(n)+"="
     outPt2=""
     for fac in factorsCondensed.keys():
         xmod=x%fac
         exp=factorsCondensed[fac]
-        crit=eulerCriterion(xmod,fac)
-        if verbose:
+        crit=euler_criterion(xmod,fac)
+        if verbose and composite:
             out+="("+str(xmod)+"/"+str(fac)+")"
             outPt2+="("+str(crit)+")"
             if (exp>1):
@@ -59,12 +61,39 @@ def jacobi(x,n,verbose=False):
     if verbose:
         out=out[:-1]
         outPt2=outPt2[:-1]
-        print(out)
+        if len(out.strip())>0:
+            print(out)
         for fac in factorsCondensed.keys():
             xmod=x%fac
             exp=factorsCondensed[fac]
-            crit=eulerCriterion(xmod,fac,True)
+            crit=euler_criterion(xmod,fac,True)
         if composite:
             outPt2+="="+str(res)
             print(outPt2)
     return res
+
+def quadratic_residues(x,verbose=False):
+    residues={}
+    delim="|"
+    for i in range(x):
+        n=i+1
+        jac=jacobi(n,x,verbose)
+        residues[n]=False
+        if (jac>0):
+            residues[n]=True
+    residueList=[]
+    ln=1
+    for k in residues.keys():
+        ln=max(ln,len(str(k)))
+        ln=max(ln,len(str(residues[k])))
+    s=""
+    s2=""
+    for k in sorted(residues.keys()):
+        v=residues[k]
+        s+=tintTrueFalse(str(k).ljust(ln),v)+delim
+        s2+=tintTrueFalse(str(residues[k]).ljust(ln),v)+delim
+        residueList.append(v)
+    if verbose:
+        print(s)
+        print(s2)
+    return residueList
