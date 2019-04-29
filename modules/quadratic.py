@@ -25,6 +25,7 @@ def eulerCriterion(a,p,verbose=False):
     return ret
 
 def jacobi(x,n,verbose=False):
+    #currently uses euler criterion, so only works on certain composites. Needs alternate method?
     factors = jc_factors(n)
     factorsCondensed={}
     for fac in factors:
@@ -32,7 +33,8 @@ def jacobi(x,n,verbose=False):
             factorsCondensed[fac]+=1
         else:
             factorsCondensed[fac]=1
-    if verbose:
+    composite=(len(factors)>1 or (len(factors)==1 and factorsCondensed[factors[0]]>1))
+    if verbose and composite:
         print("factors:")
         print(factorsCondensed)
     if x%n==0:
@@ -62,6 +64,7 @@ def jacobi(x,n,verbose=False):
             xmod=x%fac
             exp=factorsCondensed[fac]
             crit=eulerCriterion(xmod,fac,True)
-        outPt2+="="+str(res)
-        print(out+"="+outPt2)
+        if composite:
+            outPt2+="="+str(res)
+            print(outPt2)
     return res
