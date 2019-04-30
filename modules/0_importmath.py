@@ -1,5 +1,5 @@
 from math import floor, ceil, gcd, sqrt
-from random import random
+from random import random, randrange
 
 def mod(x,y):
     return x%y
