@@ -81,7 +81,8 @@ def quadratic_residues(x,verbose=False):
         v=residues[k]
         s+=tintTrueFalse(str(k).ljust(ln),v)+delim
         s2+=tintTrueFalse(str(residues[k]).ljust(ln),v)+delim
-        residueList.append(v)
+        if v:
+            residueList.append(k)
     if verbose:
         print(s)
         print(s2)
