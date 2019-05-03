@@ -1,4 +1,47 @@
 def primitive_roots(modulo,verbose=False):
+    if is_prime(modulo):
+        n=modulo
+        nsub=n-1
+        factors=factor(nsub)
+        if verbose:
+            print("Factors: "+str(factors))
+            print("Raising each number to factors until prim root is found.")
+        primRoot=-1
+        for i in range(1,n):
+            isPrim=True
+            s=""
+            for fac in factors:
+                p=pow(i,fac,n)
+                s+=str(i)+superscript(fac)+" mod "+str(n)+"="+str(p)+", "
+                if fac!=nsub and p==1:
+                    s=s[:-2]+" - not prime.  "
+                    isPrim=False
+                    break
+            s=s[:-2]
+            if verbose:
+                print(s)
+            if isPrim:
+                if verbose:
+                    print("Primitive root found!")
+                primRoot=i
+                break
+        if primRoot == -1:
+            if verbose:
+                print("No primitive roots!")
+            return
+        else:
+            coprime_set = {num for num in range(1, nsub) if gcd(num, nsub) == 1}
+            if verbose:
+                print("Raising "+str(primRoot)+" to coprimes n-1: ")
+                print(coprime_set)
+            roots=[]
+            for ex in coprime_set:
+                p=pow(primRoot,ex,n)
+                roots.append(p)
+                if verbose:
+                    print(str(primRoot)+superscript(ex)+" mod "+str(n)+"="+str(p))
+            return sorted(roots)
+        return
     coprime_set = {num for num in range(1, modulo) if gcd(num, modulo) == 1}
     if verbose:
         print("coprimes:")

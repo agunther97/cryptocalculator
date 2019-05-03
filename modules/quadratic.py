@@ -1,14 +1,3 @@
-def jc_factors(nr):
-    i = 2
-    factors = []
-    while i <= nr:
-        if (nr % i) == 0:
-            factors.append(i)
-            nr = nr / i
-        else:
-            i = i + 1
-    return factors
-
 def euler_criterion(a,p,verbose=False):
     ret = None
     if (a%p==0):
@@ -26,7 +15,7 @@ def euler_criterion(a,p,verbose=False):
 
 def jacobi(x,n,verbose=False):
     #currently uses euler criterion, so only works on certain composites. Needs alternate method?
-    factors = jc_factors(n)
+    factors = factor_primitive(n)
     factorsCondensed={}
     for fac in factors:
         if fac in factorsCondensed:

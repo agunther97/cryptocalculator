@@ -1,6 +1,6 @@
 from math import ceil, floor, sqrt
 
-def factor(n):
+def factor_fermat(n):
     t=floor(sqrt(n)) #t is the square root of n, rounded down
     sq=pow(t,2)-n #calculate s
     while(t<n):
