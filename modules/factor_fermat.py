@@ -11,5 +11,3 @@ def factor(n):
             sq=pow(t,2)-n #calculate s
     if sqrt(sq)==floor(sqrt(sq)): #if it’s a perfect square
         return [t,int(sqrt(sq))]
-
-print(factor(310485170747))
