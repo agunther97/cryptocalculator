@@ -1,3 +1,7 @@
+def split2len(x, n):
+    chunks, chunk_size = len(x), n
+    return [ x[i:i+chunk_size] for i in range(0, chunks, chunk_size) ]
+
 def euler_criterion(a,p,verbose=False):
     ret = None
     if (a%p==0):
@@ -62,28 +66,64 @@ def jacobi(x,n,verbose=False):
     return res
 
 def quadratic_residues(x,verbose=False):
-    residues={}
     delim="|"
-    for i in range(x):
-        n=i+1
-        jac=jacobi(n,x,verbose)
-        residues[n]=False
-        if (jac>0):
-            residues[n]=True
-    residueList=[]
-    ln=1
-    for k in residues.keys():
-        ln=max(ln,len(str(k)))
-        ln=max(ln,len(str(residues[k])))
-    s=""
-    s2=""
-    for k in sorted(residues.keys()):
-        v=residues[k]
-        s+=tintTrueFalse(str(k).ljust(ln),v)+delim
-        s2+=tintTrueFalse(str(residues[k]).ljust(ln),v)+delim
-        if v:
-            residueList.append(k)
-    if verbose:
-        print(s)
-        print(s2)
-    return residueList
+    if is_prime(x) and x>30:
+        residues={}
+        for i in range(x):
+            n=i+1
+            jac=jacobi(n,x,verbose)
+            residues[n]=False
+            if (jac>0):
+                residues[n]=True
+        residueList=[]
+        ln=1
+        for k in residues.keys():
+            ln=max(ln,len(str(k)))
+            ln=max(ln,len(str(residues[k])))
+        s=""
+        s2=""
+        for k in sorted(residues.keys()):
+            v=residues[k]
+            s+=tintTrueFalse(str(k).ljust(ln),v)+delim
+            s2+=tintTrueFalse(str(residues[k]).ljust(ln),v)+delim
+            if v:
+                residueList.append(k)
+        if verbose:
+            sChunks=split2len(s,160)
+            sChunks2=split2len(s2,160)
+            for i in range(len(sChunks)):
+                fChar=sChunks[i][0]
+                if fChar and (not fChar.isalpha()) and (not fChar.isnumeric()) and (fChar!="|"):
+                    sChunks2[i]=fChar+sChunks2[i]
+                print(sChunks[i])
+                #if lastChar and (not lastChar.isalpha()) and (not lastChar.isnumeric()):
+                    #sChunks2[i]+=lastChar.replace("\n","")
+                print(sChunks2[i])
+                lastChar=s[-1]
+        return residueList
+    else:
+        if verbose:
+            print("Generating table of squares.")
+            tab={}
+            residueList=[]
+            for i in range(1,x):
+                tab[i]=pow(i,2,x)
+                if not (tab[i] in residueList):
+                    residueList.append(tab[i])
+            ln=1
+            for k in tab.keys():
+                ln=max(ln,len(str(k)))
+                ln=max(ln,len(str(tab[k])))
+            if verbose:
+                s=""
+                s2=""
+                for k in sorted(tab.keys()):
+                    s+=str(k).ljust(ln)+delim
+                    s2+=str(tab[k]).ljust(ln)+delim
+                print("x:  "+s)
+                print("x"+superscript(2)+": "+s2)
+            if 0 in residueList:
+                residueList.remove(0)
+            return sorted(residueList)
+                
+                
