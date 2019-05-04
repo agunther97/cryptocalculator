@@ -10,7 +10,7 @@ import glob, os, code, sys, rlcompleter, readline
 
 os.chdir("./enums")
 
-for file in glob.glob("*.py"):
+for file in sorted(glob.glob("*.py")):
 	exec(open("./"+file).read())
 
 os.chdir("../")
@@ -141,7 +141,7 @@ def help(*args):
 #load modules
 os.chdir("./modules")
 
-for file in glob.glob("*.py"):
+for file in sorted(glob.glob("*.py")):
 	exec(open("./"+file).read())
 
 os.chdir("../")
