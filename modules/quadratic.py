@@ -19,7 +19,7 @@ def euler_criterion(a,p,verbose=False):
 
 def jacobi(x,n,verbose=False):
     #currently uses euler criterion, so only works on certain composites. Needs alternate method?
-    factors = factor_primitive(n)
+    factors = factor_prime(n)
     factorsCondensed={}
     for fac in factors:
         if fac in factorsCondensed:

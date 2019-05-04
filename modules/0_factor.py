@@ -1,6 +1,6 @@
 from functools import reduce
 
-def factor_primitive(nr):
+def factor_prime(nr):
     i = 2
     factors = []
     while i <= nr:
