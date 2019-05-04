@@ -4,7 +4,8 @@ def vigenere_encrypt(s,k,alphabet=alphabet,verbose=False):
     sLen=len(s)
     kLen=len(k)
     if type(s)==list:
-        numberString[i]=s[i]
+        for i in range(sLen):
+            numberString[i]=s[i]
     else:
         for i in range(sLen):
             numberString[i]=LUT(alphabet,s[i])
@@ -13,7 +14,8 @@ def vigenere_encrypt(s,k,alphabet=alphabet,verbose=False):
         print(numberString)
     numberKeyString=[None]*kLen
     if type(k)==list:
-        numberString[i]=k[i]
+        for i in range(kLen):
+            numberKeyString[i]=k[i]
     else:
         for i in range(kLen):
             numberKeyString[i]=LUT(alphabet,k[i])
@@ -39,7 +41,8 @@ def vigenere_decrypt(s,k,alphabet=alphabet,verbose=False):
     sLen=len(s)
     kLen=len(k)
     if type(s)==list:
-        numberString[i]=s[i]
+        for i in range(sLen):
+            numberString[i]=s[i]
     else:
         for i in range(sLen):
             numberString[i]=LUT(alphabet,s[i])
@@ -48,7 +51,8 @@ def vigenere_decrypt(s,k,alphabet=alphabet,verbose=False):
         print(numberString)
     numberKeyString=[None]*kLen
     if type(k)==list:
-        numberString[i]=k[i]
+        for i in range(kLen):
+            numberKeyString[i]=k[i]
     else:
         for i in range(kLen):
             numberKeyString[i]=LUT(alphabet,k[i])
