@@ -1,4 +1,8 @@
 def rabin_decrypt(y, p, q, verbose=False):
+    if p % 4 != 3:
+        return 'p must = 3 in mod 4'
+    elif q % 4 != 3:
+        return 'q must = 3 in mod 4'
     p_pos = pow(y,int((p+1)/4),p)
     q_pos = pow(y,int((q+1)/4),q)
     if verbose:
@@ -26,3 +30,10 @@ def rabin_decrypt(y, p, q, verbose=False):
     if verbose: print('\nSet 4 Solved')
     set_4 = chinese_remainder([-1*p_pos, -1*q_pos], mod_values, verbose)
     return [set_1, set_2, set_3, set_4]
+
+    registerFunction("rabin_decrypt", {
+    "name" : "Decrypt Rabin Cryptosystem",
+    "arguments_short":["y","p", "q", "verbose=False"],
+    "arguments":["y=ciphertext=x^2 mod n", "p=prime s.t. p = 3 mod 4", "q=prime s.t. q = 3 mod 4", "give step-by-step instructions"],
+    "description":"Returns all decryptions of a given ciphertext"
+})
