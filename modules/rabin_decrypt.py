@@ -31,9 +31,9 @@ def rabin_decrypt(y, p, q, verbose=False):
     set_4 = chinese_remainder([-1*p_pos, -1*q_pos], mod_values, verbose)
     return [set_1, set_2, set_3, set_4]
 
-    registerFunction("rabin_decrypt", {
-    "name" : "Decrypt Rabin Cryptosystem",
-    "arguments_short":["y","p", "q", "verbose=False"],
-    "arguments":["y=ciphertext=x^2 mod n", "p=prime s.t. p = 3 mod 4", "q=prime s.t. q = 3 mod 4", "give step-by-step instructions"],
-    "description":"Returns all decryptions of a given ciphertext"
+registerFunction("rabin_decrypt", {
+"name" : "Decrypt Rabin Cryptosystem",
+"arguments_short":["y","p", "q", "verbose=False"],
+"arguments":["y=ciphertext=x^2 mod n", "p=prime s.t. p = 3 mod 4", "q=prime s.t. q = 3 mod 4", "give step-by-step instructions"],
+"description":"Returns all decryptions of a given ciphertext"
 })
