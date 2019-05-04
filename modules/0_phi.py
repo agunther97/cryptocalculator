@@ -18,3 +18,10 @@ def phi(n,verbose=False):
     if verbose:
         print(totient+"="+s)
     return total
+
+registerFunction("phi", {
+    "name" : "Phi",
+    "arguments_short":["n","verbose=False"],
+    "arguments":["number","print commands"],
+    "description":"Computes Euler's totient of a number"
+})
