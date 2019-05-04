@@ -10,7 +10,7 @@ import glob, os, code, sys, rlcompleter, readline
 
 os.chdir("./enums")
 
-for file in glob.glob("*.py"):
+for file in sorted(glob.glob("*.py")):
 	exec(open("./"+file).read())
 
 os.chdir("../")
@@ -78,7 +78,7 @@ def displayFunctions():
     i=0
     s=""
     for f in funcList:
-        s+=f+"("
+        s+=tcolors.HEADER+f+tcolors.ENDC+"("
         data = calculatorFunctions[f]
         args = None
         if "arguments_short" in data:
@@ -104,9 +104,9 @@ def displayFunction(fn):
     data=calculatorFunctions[fn]
 
     if "name" in data:
-        print(data["name"])
+        print(tcolors.HEADER+data["name"]+tcolors.ENDC)
     else:
-        print(fn)
+        print(tcolors.HEADER+fn+tcolors.ENDC)
     args = []
     if "arguments" in data:
         args=data["arguments"]
@@ -141,7 +141,7 @@ def help(*args):
 #load modules
 os.chdir("./modules")
 
-for file in glob.glob("*.py"):
+for file in sorted(glob.glob("*.py")):
 	exec(open("./"+file).read())
 
 os.chdir("../")
