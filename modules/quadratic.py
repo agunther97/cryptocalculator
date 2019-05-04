@@ -126,4 +126,16 @@ def quadratic_residues(x,verbose=False):
                 residueList.remove(0)
             return sorted(residueList)
                 
-                
+registerFunction("quadratic_residues", {
+    "name" : "Quadratic Residues",
+    "arguments_short":["modulo","verbose=False"],
+    "arguments":["modulo","print commands"],
+    "description":"Returns quadratic residues of a modulo"
+})
+
+registerFunction("euler_criterion", {
+    "name" : "Euler's Criterion",
+    "arguments_short":["x","p","verbose=False"],
+    "arguments":["number","modulo (prime)","print commands"],
+    "description":"Returns if number is a quadratic residue of a prime"
+})
