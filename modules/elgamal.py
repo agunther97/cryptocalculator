@@ -111,6 +111,26 @@ def elgamal_crack_a(p, alpha, beta, verbose=False):
             print("a=mod(m*j+i,p)=mod("+str(m)+"*"+str(j)+"+"+str(i)+","+str(p)+")="+str(ret))
         return ret
 
+def elgamal_sign(x,p,alpha,a,k=None,verbose=False):
+    if type(x)==str:
+        x=ttn(x)
+    gamma=pow(alpha,k,p)
+    delta=mod((x-a*gamma)*inv(k,p-1),p-1)
+    if verbose:
+        print("gamma=sam(alpha,k,p)=sam("+str(alpha)+","+str(k)+","+str(p)+")="+str(gamma))
+        print("delta=mod(("+str(x)+"-"+str(a)+"*"+str(gamma)+")*inv("+str(k)+","+str(p)+"-1),"+str(p)+"-1)="+str(delta))
+    return (gamma,delta)
+
+def elgamal_verify(x,tuple,p,alpha,beta,verbose=False):
+    gamma=tuple[0]
+    delta=tuple[1]
+    v1=mod(pow(beta,gamma,p)*pow(gamma,delta,p),p)
+    v2=pow(alpha,x,p)
+    if verbose:
+        print("v1=mod(sam(beta,gamma,p)*sam(gamma,delta,p),p)=mod(sam("+str(beta)+","+str(gamma)+","+str(p)+")*sam("+str(gamma)+","+str(delta)+","+str(p)+"),"+str(p)+")="+str(v1))
+        print("v2=sam(alpha,x,p)=sam("+str(alpha)+","+str(x)+","+str(p)+")="+str(v2))
+    return (v1==v2)
+
 registerFunction("elgamal_alpha", {
     "name" : "Elgamal Generate Alpha",
     "arguments_short":["p","verbose=False"],
@@ -158,4 +178,18 @@ registerFunction("elgamal_crack_a", {
     "arguments_short":["p","alpha","beta","verbose=False"],
     "arguments":["modulous","alpha","beta","print directions"],
     "description":"Computes a using table crack method"
+})
+
+registerFunction("elgamal_sign", {
+    "name" : "Elgamal Signature",
+    "arguments_short":["x","p","alpha","a","k=None","verbose=False"],
+    "arguments":["message","modulous","alpha","secret","random value","print commands"],
+    "description":"Returns signed tuple gamma/delta for given message"
+})
+
+registerFunction("elgamal_verify", {
+    "name" : "Elgamal Verify Signature",
+    "arguments_short":["x","tuple","p","alpha","beta","verbose=False"],
+    "arguments":["message","signature","modulous","alpha","beta","print commands"],
+    "description":"Verifies signature for a given message + tuple"
 })
