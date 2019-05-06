@@ -118,3 +118,23 @@ def vigenere_key(p,c,alphabet=alphabet,verbose=False):
     for i in range(keyLen):
         outStr+=alphabet[keyAr[i]]
     return outStr
+
+registerFunction("vigenere_encrypt", {
+"name" : "Encrypt Vigenere Cryptosystem",
+"arguments_short":["s","k", "alphabet", "verbose=False"],
+"arguments":["s=plaintext as text", "k=key as text", "alphabet the system was encrypted with (default is mod 26)", "give step-by-step instructions"],
+"description":"Returns encrypted ciphertext"})
+
+registerFunction("vigenere_decrypt", {
+"name" : "Decrypt Vigenere Cryptosystem",
+"arguments_short":["s","k", "alphabet", "verbose=False"],
+"arguments":["s=ciphertext as text", "k=key as text", "alphabet the system was encrypted with (default is mod 26)", "give step-by-step instructions"],
+"description":"Returns decrypted plaintext"
+})
+
+registerFunction("vigenere_key", {
+"name" : "Find Vigenere Key with Plaintext and Ciphertext",
+"arguments_short":["p","c", "alphabet", "verbose=False"],
+"arguments":["p=plaintext as text", "c=ciphertext as text", "alphabet the system was encrypted with (default is mod 26)", "give step-by-step instructions"],
+"description":"Returns key to Vigenere system"
+})

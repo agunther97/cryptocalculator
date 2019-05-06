@@ -68,3 +68,9 @@ def is_primitive_root(n,mod):
 
 def primitive_elements(mod,verbose=False):
     return primitive_roots(mod,verbose)
+
+registerFunction("primitive_elements", {
+"name" : "Find Primitive Elements",
+"arguments_short":["mod","verbose=False"],
+"arguments":["mod value", "give step-by-step instructions"],
+"description":"Returns all primitive elements under a mod"})

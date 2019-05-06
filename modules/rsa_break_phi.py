@@ -19,6 +19,6 @@ def rsa_break_phi(n, phi_n, verbose=False):
 registerFunction("rsa_break_phi", {
     "name" : "Break RSA using Quadratic Formula",
     "arguments_short":["n","phi_n","verbose=False"],
-    "arguments":["n=modulo=p*q", "phi/totient","give step-by-step instructions"],
+    "arguments":["n=p*q", "phi(n) or totient(n)","give step-by-step instructions"],
     "description":"Returns p and q for a given n"
 })
