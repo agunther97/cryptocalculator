@@ -6,8 +6,8 @@ def rabin_decrypt(y, p, q, verbose=False):
     p_pos = pow(y,int((p+1)/4),p)
     q_pos = pow(y,int((q+1)/4),q)
     if verbose:
-        print('√(' + str(y) + ') mod ' + str(p) + ' = ' +  str(y) + superscript(int((p+1)/4)) + ' mod ' + str(p))
-        print('and √(' + str(y) + ') mod ' + str(q) + ' = ' +  str(y) + superscript(int((q+1)/4)) + ' mod ' + str(q))
+        print('√(' + str(y) + ') mod ' + str(p) + ' = '+str(y)+'^(('+str(p)+'+1)/4)=' +  str(y) + superscript(int((p+1)/4)) + ' mod ' + str(p))
+        print('and √(' + str(y) + ') mod ' + str(q) + ' = '+str(y)+'^(('+str(q)+'+1)/4)=' +  str(y) + superscript(int((q+1)/4)) + ' mod ' + str(q))
         print('Set 1:')
         print('  x ≡ ' + str(p_pos) + ' mod ' + str(p))
         print('  x ≡ ' + str(q_pos) + ' mod ' + str(q))
