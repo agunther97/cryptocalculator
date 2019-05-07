@@ -4,7 +4,7 @@ def primitive_roots(modulo,verbose=False):
         nsub=n-1
         factors=factor(nsub)
         if verbose:
-            print("Factors: "+str(factors))
+            print("Factors n-1: "+str(factors))
             print("Raising each number to factors until prim root is found.")
         primRoot=-1
         for i in range(1,n):
