@@ -105,9 +105,28 @@ TODO
         * Alpha
         * Beta
 
-* elgamald(data,p,a),
-* elgamale(data,p,alpha,a,k=None,verbose=False),
-* euler_criterion(x,p,verbose=False), inv(x,y),
+### Elgamal Decryption
+* elgamald(data, p, a)
+    * Description:
+        * Computes plaintext using Elgamal decryption
+    * Parameters:
+        * data: ciphertext number list
+        * p: modulous
+        * a: Secret
+
+### Elgamal Encryption
+* elgamale(data, p, alpha, a, k=None)
+    * Description: Computes ciphertext using Elgamal encryption
+    * Parameters: 
+        * data: plaintext number list
+        * Modulous
+        * Alpha
+        * Beta
+        * k: Random value
+  
+### Euler's Criterion
+* euler_criterion(x, p)
+* inv(x,y)
 * irreducible_poly(deg,field,fast=True,verbose=False), lower(s),
 * multiplicative_inverse(x,y),
 * ntt_book(data,segLen=3,alpha=alphabet), phi(n,verbose=False),
