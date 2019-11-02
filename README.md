@@ -123,7 +123,7 @@ pip install pyreadline
         * p: modulo
 
 
-### Find multiplicative Inverse
+### Find Multiplicative Inverse
 * inv(x,y) or multiplicative_inverse(x, y)
     * Description: Find multiplicative inverse
     * Parameters 
@@ -138,7 +138,7 @@ pip install pyreadline
         * field: the field size (i.e. Z mod #)
         * fast: se fast algorithm? default on, only calculates leading coeff. 1 and extrapolates
 
-### Irreducible Polynomials over Field
+### Numbers to Text (Book)
 * ntt_book(data,segLen=3,alpha=alphabet)
     * Description: Converts numbers to text using the book algorithm
     * Parameters 
@@ -152,16 +152,149 @@ pip install pyreadline
     * Parameters
         * n: number
 
-* primitive_elements(mod,verbose=False),
-* quadratic_residues(modulo,verbose=False),
-* rabin_decrypt(y,p,q,verbose=False),
-* rabin_encrypt(x,p,q,verbose=False),
-* rsa_break_phi(n,phi_n,verbose=False),
-* rsa_crack(data,n,e,verbose=False), rsa_d(phi_n,e,verbose=False),
-* rsa_decrypt(data,n,d,verbose=False),
-* rsa_encrypt(data,n,e,verbose=False), rsa_n(p,q,verbose=False),
-* rsa_phi(p,q,verbose=False), rsa_pq(n,verbose=False),
-* sam(x,c,n), ttn_book(data,segLen=3,alpha=alphabet),
-* upper(s), vigenere_decrypt(s,k,alphabet,verbose=False),
-* vigenere_encrypt(s,k,alphabet,verbose=False),
-* vigenere_key(p,c,alphabet,verbose=False)
+### Find Primitive Elements
+* primitive_elements(mod,verbose=False)
+    * Description: Returns all primitive elements under a mod
+    * Parameters
+        * mod: modulous value
+        * verbose: give step-by-step instructions
+
+### Quadratic Residues
+* quadratic_residues(modulo,verbose=False)
+    * Description: Returns quadratic residues of a modulo
+    * Parameters
+        * modulo: modulous value
+        * verbose: print commands
+
+### Decrypt Rabin Cryptosystem
+* rabin_decrypt("y","p", "q", "verbose=False")
+	* Description: Returns all decryptions of a given ciphertext
+	* Parameters
+        * y: ciphertext=x^2 mod n
+		* p: prime s.t. p = 3 mod 4
+		* q: prime s.t. q = 3 mod 4
+		* verbose: give step-by-step instructions
+
+### Encrypt Rabin Cryptosystem
+* rabin_encrypt("x","p", "q", "verbose=False")
+	* Description: Returns encrypted ciphertext
+	* Parameters
+        * x: plaintext as numbers
+		* p: prime s.t. p = 3 mod 4
+		* q: prime s.t. q = 3 mod 4
+		* verbose: give step-by-step instructions
+
+### Break RSA using Quadratic Formula
+* rsa_break_phi(n,phi_n,verbose=False)
+    * Description: Returns p and q for a given n
+    * Parameters
+        * n: n=p*q
+        * phi_n: totient, calculated with phi(n) or totient(n)
+        * verbose: give step-by-step instructions
+
+### Crack RSA
+* rsa_crack(data,n,e,verbose=False)
+    * Description: Cracks ciphertext given e and n, returning number list
+    * Parameters
+        * data: ciphertext number list
+        * n: modulous
+        * e: encryption exponent
+        * verbose: print commands
+
+### Find Decryption Exponential for RSA
+* rsa_d(phi_n,e,verbose=False)
+    * Description: Returns the decryption exponential for RSA
+    * Parameters
+        * phi_n: totient, calculated with phi(n) or totient(n)
+        * e: the public RSA encryption exponential e
+        * verbose: print commands
+
+### Decrypt RSA encrypted text
+* rsa_decrypt(data,n,d,verbose=False)
+    * Description: Decrypt RSA encrypted text
+    * Parameters
+        * data: ciphertext list in numbers
+        * n: modulous value
+        * d: decryption exponent d
+        * verbose: print commands
+        
+### Encrypt data with RSA
+* rsa_encrypt(data,n,e,verbose=False)
+    * Description: Returns the ciphertext in numbers for a given plaintext
+    * Parameters
+        * data: plaintext list in numbers
+        * n: modulous value
+        * e: encryption exponent e
+        * verbose: print commands
+
+### Find N for RSA
+* rsa_n(p,q,verbose=False)
+    * Description: Returns n where n = (p) * (q) for RSA
+    * Parameters
+        * p: p of rsa (rsa n = p*q)
+        * q: q of rsa (rsa n = p*q)
+        * verbose: print commands
+
+### Find PHI(n) for RSA
+* rsa_phi(p,q,verbose=False)
+    * Description: Returns the totient where the totient = (p-1) * (q-1) for RSA
+    * Parameters
+        * p: p of rsa (rsa n = p*q)
+        * q: q of rsa (rsa n = p*q)
+        * verbose: print commands
+
+### Find P and Q for RSA
+* rsa_pq(n,verbose=False)
+    * Description: Returns (p,q) where n = pq for RSA
+    * Parameters
+        * n: product n=pq of RSA
+        * verbose: print commands
+
+### Square and Multiply
+* sam(x,c,n)
+    * Description: Returns a float z s.t. x^c mod n = z
+    * Parameters
+        * x: base
+        * e: exponent
+        * m: mod
+
+### Text to Numbers (Book)
+* ttn_book( data,segLen=3, alpha=alphabet)
+    * Description: Converts text to numbers using the book algorithm
+    * Parameters
+        * data: datato convert
+        * segLen: letters per number
+        * alphabet: alphabet, list like ["a","b","c"]
+
+### Uppercase
+* upper(s)
+    * Description: Converts text to uppercase
+    * Parameters
+        * s: input string
+
+### Encrypt Vigenere Cryptosystem
+* vigenere_encrypt(s, k, alphabet, verbose=False)
+	* Description: Returns encrypted ciphertext
+	* Parameters
+        * s: plaintext as text
+		* k: key as text
+		* alphabet: alphabet the system was encrypted with (default is mod 26)
+        * verbose: give step-by-step instructions
+
+### Decrypt Vigenere Cryptosystem
+* vigenere_decrypt(s, k, alphabet, verbose=False)
+	* Description: Returns decrypted plaintext
+	* Parameters
+        * s: ciphertext as text
+		* k: key as text
+		* alphabet: alphabet the system was encrypted with (default is mod 26)
+        * verbose: give step-by-step instructions
+
+### Find Vigenere Key with Plaintext and Ciphertext
+* vigenere_key(p, c, alphabet, verbose=False)
+	* Description: Returns key to Vigenere system
+	* Parameters
+        * p: plaintext as text
+        * c: ciphertext as text
+        * alphabet: alphabet the system was encrypted with (default is mod 26)
+        * verbose: give step-by-step instructions
