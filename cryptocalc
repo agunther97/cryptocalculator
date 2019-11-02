@@ -4,14 +4,16 @@
 #initial config
 #
 
-import glob, os, code, sys, rlcompleter, readline
+import glob, os, code, sys, rlcompleter, io
 
 #load enums and constants
 
 os.chdir("./enums")
 
 for file in sorted(glob.glob("*.py")):
-	exec(open("./"+file).read())
+    f = io.open("./"+file, mode="r", encoding="utf-8", errors="ignore" )
+    exec(f.read())
+    f.close()
 
 os.chdir("../")
 
@@ -24,125 +26,127 @@ calculatorFunctions = {}
 
 #formatted print to limit width of strings
 def fmtWrite(s, splitSearch, indent="", hangingIndent=True):
-    #this splits by line length 80 on commas
-    buff=""
-    cap=lineCap*1
-    hanging=not hangingIndent
-    if not hanging:
-        cap=cap-len(indent)
-    while len(s)>0:
-        p = s.find(splitSearch)
-        if (p==-1):
-            if (len(s)+len(buff))>cap:
-                print(buff)
-                print(s)
-                buff=""
-                s=""
-            else:
-                buff+=s
-                s=""
-        else:
-            doTrim=False
-            if (len(buff)+p)>cap:
-                if hanging:
-                    buff=indent+buff
-                    doTrim=True
-                else:
-                    hanging=True
-                    cap=lineCap-len(indent)
-                print(buff)
-                buff=""
-            cut=p+len(splitSearch)
-            buff+=s[0:cut]
-            if doTrim:
-                buff=buff.lstrip()
-            s=s[cut:len(s)]
-    if len(buff)>0:
-        if indent and hanging:
-            buff=indent+buff
-        print(buff)
+	#this splits by line length 80 on commas
+	buff=""
+	cap=lineCap*1
+	hanging=not hangingIndent
+	if not hanging:
+		cap=cap-len(indent)
+	while len(s)>0:
+		p = s.find(splitSearch)
+		if (p==-1):
+			if (len(s)+len(buff))>cap:
+				print(buff)
+				print(s)
+				buff=""
+				s=""
+			else:
+				buff+=s
+				s=""
+		else:
+			doTrim=False
+			if (len(buff)+p)>cap:
+				if hanging:
+					buff=indent+buff
+					doTrim=True
+				else:
+					hanging=True
+					cap=lineCap-len(indent)
+				print(buff)
+				buff=""
+			cut=p+len(splitSearch)
+			buff+=s[0:cut]
+			if doTrim:
+				buff=buff.lstrip()
+			s=s[cut:len(s)]
+	if len(buff)>0:
+		if indent and hanging:
+			buff=indent+buff
+		print(buff)
 
 #convenience func to register data in the dictionary
 def registerFunction(fn, data):
-    calculatorFunctions[fn]=data
+	calculatorFunctions[fn]=data
 
 #list functions
 def displayFunctions():
-    sz=len(calculatorFunctions.keys())
-    funcList = [None for x in range(sz)]
-    i=0
-    for k,v in calculatorFunctions.items():
-        funcList[i]=k
-        i+=1
-    funcList.sort()
-    i=0
-    s=""
-    for f in funcList:
-        s+=tcolors.HEADER+f+tcolors.ENDC+"("
-        data = calculatorFunctions[f]
-        args = None
-        if "arguments_short" in data:
-            args=data["arguments_short"]
-        elif "arguments" in data:
-            args=data["arguments"]
+	sz=len(calculatorFunctions.keys())
+	funcList = [None for x in range(sz)]
+	i=0
+	for k,v in calculatorFunctions.items():
+		funcList[i]=k
+		i+=1
+	funcList.sort()
+	i=0
+	s=""
+	for f in funcList:
+		s+=tcolors.HEADER+f+tcolors.ENDC+"("
+		data = calculatorFunctions[f]
+		args = None
+		if "arguments_short" in data:
+			args=data["arguments_short"]
+		elif "arguments" in data:
+			args=data["arguments"]
 
-        if not (args is None):
-            for j in range(len(args)):
-                s=s+args[j]
-                if j<len(args)-1:
-                    s=s+","
-            s=s+")"
-            if (i<len(funcList)-1):
-                s=s+", "
-            i=i+1
-    print("Registered Functions:")
-    fmtWrite(s,"),",indent=indentStr,hangingIndent=False)
-    print("Use help(functionName) for more information.")
+		if not (args is None):
+			for j in range(len(args)):
+				s=s+args[j]
+				if j<len(args)-1:
+					s=s+","
+			s=s+")"
+			if (i<len(funcList)-1):
+				s=s+", "
+			i=i+1
+	print("Registered Functions:")
+	fmtWrite(s,"),",indent=indentStr,hangingIndent=False)
+	print("Use help(functionName) for more information.")
 
 #display function info
 def displayFunction(fn):
-    data=calculatorFunctions[fn]
+	data=calculatorFunctions[fn]
 
-    if "name" in data:
-        print(tcolors.HEADER+data["name"]+tcolors.ENDC)
-    else:
-        print(tcolors.HEADER+fn+tcolors.ENDC)
-    args = []
-    if "arguments" in data:
-        args=data["arguments"]
-    elif "arguments_short" in data:
-        args=data["arguments_short"]
-    s="Usage: " + fn + "("
-    for j in range(len(args)):
-        s=s+args[j]
-        if j<len(args)-1:
-            s=s+", "
-    s=s+")"
-    fmtWrite(indentStr+s," ",indent=(indentStr+indentStr))
-    if "description" in data:
-        fmtWrite(indentStr+data["description"], " ",indent=(indentStr+indentStr))
+	if "name" in data:
+		print(tcolors.HEADER+data["name"]+tcolors.ENDC)
+	else:
+		print(tcolors.HEADER+fn+tcolors.ENDC)
+	args = []
+	if "arguments" in data:
+		args=data["arguments"]
+	elif "arguments_short" in data:
+		args=data["arguments_short"]
+	s="Usage: " + fn + "("
+	for j in range(len(args)):
+		s=s+args[j]
+		if j<len(args)-1:
+			s=s+", "
+	s=s+")"
+	fmtWrite(indentStr+s," ",indent=(indentStr+indentStr))
+	if "description" in data:
+		fmtWrite(indentStr+data["description"], " ",indent=(indentStr+indentStr))
 
 #either display general help or specifics for a function, depending on argument
 def help(*args):
-    funcName=""
-    for arg in args:
-        if len(funcName)>0:
-            funcName = funcName + " "
-        if callable(arg):
-            funcName = funcName + arg.__name__
-        else:
-            funcName = funcName + arg
-    if (funcName==""):
-        print(helpMsg)
-        displayFunctions()
-    else:
-        displayFunction(funcName)
+	funcName=""
+	for arg in args:
+		if len(funcName)>0:
+			funcName = funcName + " "
+		if callable(arg):
+			funcName = funcName + arg.__name__
+		else:
+			funcName = funcName + arg
+	if (funcName==""):
+		print(helpMsg)
+		displayFunctions()
+	else:
+		displayFunction(funcName)
 
 #load modules
 os.chdir("./modules")
 
 for file in sorted(glob.glob("*.py")):
-	exec(open("./"+file).read())
+    f = io.open("./"+file, mode="r", encoding="utf-8", errors="ignore" )
+    exec(f.read())
+    f.close()
 
 os.chdir("../")
 
@@ -152,35 +156,42 @@ os.chdir("../")
 
 #override certain strings with custom ones
 def readFunc(arg):
-    line = input(arg).strip()
-    if line in shellReplacements:
-        line=shellReplacements[line]
-    if line.find("help")!=-1 and line.find("(")>=line.find(")"):
-        lineTab = line.split(" ")
-        if len(lineTab)==2:
-            lineTab[1]=lineTab[1].replace("(","")
-            if lineTab[0]=="help" and lineTab[1] in calculatorFunctions:
-                line="help("+lineTab[1]+")"
+	line = input(arg).strip()
+	if line in shellReplacements:
+		line=shellReplacements[line]
+	if line.find("help")!=-1 and line.find("(")>=line.find(")"):
+		lineTab = line.split(" ")
+		if len(lineTab)==2:
+			lineTab[1]=lineTab[1].replace("(","")
+			if lineTab[0]=="help" and lineTab[1] in calculatorFunctions:
+				line="help("+lineTab[1]+")"
 
-    return line
+	return line
 
 #enable tab completion
-readline.parse_and_bind("tab:complete")
+try:
+	import readline
+	readline.parse_and_bind("tab:complete")
+except ImportError:
+	print("""WARNING: readline library missing
+This library is required for tab completion
+install it from http://pypi.python.org/pypi/readline
+or run pip install readline.""")
 
 #if we have args, either execute arbitary code, or execute a file with -f
 if(len(sys.argv) > 1):
-    args = sys.argv
-    args = args[1:]
-    if args[0]=="-f" and not (args[1] is None):
-        f = open(args[1])
-        if (not (f is None)):
-            exec(f.read())
-        #execute file
-    else:
-        for arg in args:
-            execute = arg + " "
-        execute = execute[:-1]
-        exec("print("+execute+")")
+	args = sys.argv
+	args = args[1:]
+	if args[0]=="-f" and not (args[1] is None):
+		f = open(args[1])
+		if (not (f is None)):
+			exec(f.read())
+		#execute file
+	else:
+		for arg in args:
+			execute = arg + " "
+		execute = execute[:-1]
+		exec("print("+execute+")")
 else:
-    #enter interactive state
-    code.interact(banner=welcomeBanner, readfunc=readFunc, local=dict(globals(), **locals())) 
+	#enter interactive state
+	code.interact(banner=welcomeBanner, readfunc=readFunc, local=dict(globals(), **locals())) 
