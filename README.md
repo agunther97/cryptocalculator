@@ -30,7 +30,7 @@ pip install pyreadline
 
 ### Chinese Remainder
 * chinese_remainder(number_values, mod_values)
-    * Description:  Returns the solution to a set of congruences using chinease remainder theorem
+    * Description: Returns the solution to a set of congruences using chinease remainder theorem
     * Parameters:
         * number_values: The number values of the problem in a list (i.e. for x = 14 mod 29 you'd put 4)
         * mod_values: The mod values of the problem in a list
@@ -91,7 +91,7 @@ pip install pyreadline
 
 ### Elgamal Verify Signature
 * elgamal_verify(x, tuple, p, alpha, beta)
-    * Description: Verifies signature for a given message + tuple
+    * Description: Verifies signature for a given message and tuple
     * Parameters:
         * x: The message as a string or list of converted numbers
         * tuple: signature
@@ -125,33 +125,33 @@ pip install pyreadline
         * p: modulo
 
 
-### Find Multiplicative Inverse
-* inv(x,y) or multiplicative_inverse(x, y)
+### Find multiplicative Inverse
+* inv(x, y) or multiplicative_inverse(x, y)
     * Description: Find multiplicative inverse
-    * Parameters 
-        * x: value,
+    * Parameters: 
+        * x: value
         * y: mod
   
 ### Irreducible Polynomials over Field
-* irreducible_poly(deg,field,fast=True)
+* irreducible_poly(deg, field, fast=True)
     * Description: Returns the number of irreducible polynomials for a given field size
-    * Parameters 
-        * deg: the degree of the polynominal,
+    * Parameters: 
+        * deg: the degree of the polynominal
         * field: the field size (i.e. Z mod #)
-        * fast: se fast algorithm? default on, only calculates leading coeff. 1 and extrapolates
+        * fast: use fast algorithm default on, only calculates leading coeff. 1 and extrapolates
 
-### Numbers to Text (Book)
-* ntt_book(data,segLen=3,alpha=alphabet)
+### Irreducible Polynomials over Field
+* ntt_book(data, segLen=3, alpha=alphabet)
     * Description: Converts numbers to text using the book algorithm
-    * Parameters 
-        * data: data to convert,
+    * Parameters: 
+        * data: data to convert
         * segLen: letters per number
         * alpha: alphabet=list like [\"a\",\"b\",...]
 
 ### Phi
 * phi(n)
     * Description: Computes Euler's totient of a number
-    * Parameters
+    * Parameters:
         * n: number
 
 ### Find Primitive Elements
