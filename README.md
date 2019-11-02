@@ -28,7 +28,7 @@ pip install pyreadline
 
 ### Chinese Remainder
 * chinese_remainder(number_values, mod_values)
-    * Description:  Returns the solution to a set of congruences using chinease remainder theorem
+    * Description: Returns the solution to a set of congruences using chinease remainder theorem
     * Parameters:
         * number_values: The number values of the problem in a list (i.e. for x = 14 mod 29 you'd put 4)
         * mod_values: The mod values of the problem in a list
@@ -89,7 +89,7 @@ pip install pyreadline
 
 ### Elgamal Verify Signature
 * elgamal_verify(x, tuple, p, alpha, beta)
-    * Description: Verifies signature for a given message + tuple
+    * Description: Verifies signature for a given message and tuple
     * Parameters:
         * x: The message as a string or list of converted numbers
         * tuple: signature
@@ -124,38 +124,63 @@ pip install pyreadline
 
 
 ### Find multiplicative Inverse
-* inv(x,y) or multiplicative_inverse(x, y)
+* inv(x, y) or multiplicative_inverse(x, y)
     * Description: Find multiplicative inverse
-    * Parameters 
-        * x: value,
+    * Parameters: 
+        * x: value
         * y: mod
   
 ### Irreducible Polynomials over Field
-* irreducible_poly(deg,field,fast=True)
+* irreducible_poly(deg, field, fast=True)
     * Description: Returns the number of irreducible polynomials for a given field size
-    * Parameters 
-        * deg: the degree of the polynominal,
+    * Parameters: 
+        * deg: the degree of the polynominal
         * field: the field size (i.e. Z mod #)
-        * fast: se fast algorithm? default on, only calculates leading coeff. 1 and extrapolates
+        * fast: use fast algorithm default on, only calculates leading coeff. 1 and extrapolates
 
 ### Irreducible Polynomials over Field
-* ntt_book(data,segLen=3,alpha=alphabet)
+* ntt_book(data, segLen=3, alpha=alphabet)
     * Description: Converts numbers to text using the book algorithm
-    * Parameters 
-        * data: data to convert,
+    * Parameters: 
+        * data: data to convert
         * segLen: letters per number
         * alpha: alphabet=list like [\"a\",\"b\",...]
 
 ### Phi
 * phi(n)
     * Description: Computes Euler's totient of a number
-    * Parameters
+    * Parameters:
         * n: number
 
-* primitive_elements(mod,verbose=False),
-* quadratic_residues(modulo,verbose=False),
-* rabin_decrypt(y,p,q,verbose=False),
-* rabin_encrypt(x,p,q,verbose=False),
+### Find Primitive Elements
+* primitive_elements(mod)
+    * Description: Returns all primitive elements under a mod
+    * Parameters:
+        * mod: mod value
+
+### Quadratic Residues
+* quadratic_residues(modulo)
+    * Description: Returns quadratic residues of a modulo
+    * Parameters:
+        * Modulo
+
+### Decrypt Rabin Cryptosystem
+* rabin_decrypt(y, p, q)
+    * Description: Returns all decryptions of a given ciphertext
+    * Parameters:
+        * y: ciphertext=x^2 mod n
+        * p: prime s.t. p = 3 mod 4
+        * q: prime s.t. q = 3 mod 4
+
+### Encrypt Rabin Cryptosystem
+* rabin_encrypt(x, p, q)
+    * Description: Returns encrypted ciphertext
+    * Parameters:
+        * x: plaintext as numbers
+        * p: prime s.t. p = 3 mod 4
+        * q: prime s.t. q = 3 mod 4
+
+
 * rsa_break_phi(n,phi_n,verbose=False),
 * rsa_crack(data,n,e,verbose=False), rsa_d(phi_n,e,verbose=False),
 * rsa_decrypt(data,n,d,verbose=False),
