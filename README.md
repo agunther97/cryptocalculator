@@ -123,8 +123,7 @@ TODO
         * Alpha
         * Beta
         * k: Random value
-  
-### Euler's Criterion
+ 
 * euler_criterion(x, p)
 * inv(x,y)
 * irreducible_poly(deg,field,fast=True,verbose=False), lower(s),
