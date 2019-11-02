@@ -89,21 +89,21 @@ TODO
 * elgamal_sign(x, p, alpha, a, k=None)
     * Description: Returns signed tuple (gamma/delta) for given message
     * Parameters:
-    * x: The message as a string or list of converted numbers
-    * p: Modulous
-    * Alpha
-    * a: Secret
-    * k: Random value
+        * x: The message as a string or list of converted numbers
+        * p: Modulous
+        * Alpha
+        * a: Secret
+        * k: Random value
 
 ### Elgamal Verify Signature
 * elgamal_verify(x, tuple, p, alpha, beta)
     * Description: Verifies signature for a given message + tuple
     * Parameters:
-    * x: The message as a string or list of converted numbers
-    * tuple: signature
-    * p: modulous
-    * Alpha
-    * Beta
+        * x: The message as a string or list of converted numbers
+        * tuple: signature
+        * p: modulous
+        * Alpha
+        * Beta
 
 * elgamald(data,p,a),
 * elgamale(data,p,alpha,a,k=None,verbose=False),
