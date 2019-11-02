@@ -16,7 +16,9 @@ Your terminal should now be running the calculator. Use the `help` command to sh
 
 ## Windows
 
-Crypytocalc currently we supports linux. If you want to try it on Windows be our guest but as of now you will definitily have to take on a pyreadline dependency with:
+Crypytocalc was developed and tested primarily under Linux, split between Ubuntu and Arch. Though it will work under any platform which supports Python 3 or higher, this comes with a caveat: Windows lacks the readline libray by default, as well as support for the ANSI codes used for terminal colors.
+
+The former issue results in a lack of tab completion, but may be fixed by the following command:
 
 ```python
 pip install pyreadline
