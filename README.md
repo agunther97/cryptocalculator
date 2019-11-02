@@ -16,18 +16,10 @@ Your terminal should now be running the calculator. Use the `help` command to sh
 
 ## Windows
 
-Crypyto calc runs under bash, so currently we only support linux. If you want to try it on Windows be our guest but as of now you will definitily have to take on a pyreadline dependency with:
+Crypytocalc currently we supports linux. If you want to try it on Windows be our guest but as of now you will definitily have to take on a pyreadline dependency with:
 
 ```python
 pip install pyreadline
-```
-
-along with executing the cryptocalc script differently.
-
-## Adding a method
-
-```
-TODO
 ```
 
 ## Currently Supported Functions
@@ -107,8 +99,7 @@ TODO
 
 ### Elgamal Decryption
 * elgamald(data, p, a)
-    * Description:
-        * Computes plaintext using Elgamal decryption
+    * Description: Computes plaintext using Elgamal decryption
     * Parameters:
         * data: ciphertext number list
         * p: modulous
@@ -123,12 +114,44 @@ TODO
         * Alpha
         * Beta
         * k: Random value
- 
+
+### Euler's Criterion
 * euler_criterion(x, p)
-* inv(x,y)
-* irreducible_poly(deg,field,fast=True,verbose=False), lower(s),
-* multiplicative_inverse(x,y),
-* ntt_book(data,segLen=3,alpha=alphabet), phi(n,verbose=False),
+    * Description: Returns if number is a quadratic residue of a prime
+    * Parameters:
+        * x: number
+        * p: modulo
+
+
+### Find multiplicative Inverse
+* inv(x,y) or multiplicative_inverse(x, y)
+    * Description: Find multiplicative inverse
+    * Parameters 
+        * x: value,
+        * y: mod
+  
+### Irreducible Polynomials over Field
+* irreducible_poly(deg,field,fast=True)
+    * Description: Returns the number of irreducible polynomials for a given field size
+    * Parameters 
+        * deg: the degree of the polynominal,
+        * field: the field size (i.e. Z mod #)
+        * fast: se fast algorithm? default on, only calculates leading coeff. 1 and extrapolates
+
+### Irreducible Polynomials over Field
+* ntt_book(data,segLen=3,alpha=alphabet)
+    * Description: Converts numbers to text using the book algorithm
+    * Parameters 
+        * data: data to convert,
+        * segLen: letters per number
+        * alpha: alphabet=list like [\"a\",\"b\",...]
+
+### Phi
+* phi(n)
+    * Description: Computes Euler's totient of a number
+    * Parameters
+        * n: number
+
 * primitive_elements(mod,verbose=False),
 * quadratic_residues(modulo,verbose=False),
 * rabin_decrypt(y,p,q,verbose=False),
