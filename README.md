@@ -38,7 +38,7 @@ TODO
 * chinese_remainder(number_values, mod_values)
     * Description:  Returns the solution to a set of congruences using chinease remainder theorem
     * Parameters:
-        * number_values: The number values of the problem in a list (i.e. for x = 14 mod 29 you'd put 4), 
+        * number_values: The number values of the problem in a list (i.e. for x = 14 mod 29 you'd put 4)
         * mod_values: The mod values of the problem in a list
 
 ### Clear
@@ -81,7 +81,7 @@ TODO
     * Parameters: 
         * data: Plaintext number list
         * p: Modulous
-        * Alpha,
+        * Alpha
         * a: Secret 
         * k: Random value
 
