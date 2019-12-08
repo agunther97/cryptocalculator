@@ -1,6 +1,9 @@
 def rsa_encrypt(plaintext_numbers, n, e, verbose=False):
     if type(plaintext_numbers) is int:
-        plaintext_numbers = [plaintext_numbers]
+        if (plaintext_numbers>n):
+            plaintext_numbers = rsa_block(n,plaintext_numbers)
+        else:
+            plaintext_numbers = [plaintext_numbers]
     r=[pow(p, e, n) for p in plaintext_numbers]
     if verbose:
         for i in range(len(r)):
