@@ -8,7 +8,7 @@ def rsa_encrypt(plaintext_numbers, n, e, verbose=False):
     if verbose:
         for i in range(len(r)):
             p=plaintext_numbers[i]
-            print("y=sam("+str(p)+","+str(e)+","+str(n)+")="+str(r))
+            print("y=sam("+str(p)+","+str(e)+","+str(n)+")="+str(r[i]))
     return r
 
 def rsa_decrypt(ciphertext_numbers, n, d, verbose=False):
@@ -18,7 +18,7 @@ def rsa_decrypt(ciphertext_numbers, n, d, verbose=False):
     if verbose:
         for i in range(len(r)):
             p=ciphertext_numbers[i]
-            print("x=sam("+str(p)+","+str(d)+","+str(n)+")="+str(r))
+            print("x=sam("+str(p)+","+str(d)+","+str(n)+")="+str(r[i]))
     return r
 
 registerFunction("rsa_encrypt", {
