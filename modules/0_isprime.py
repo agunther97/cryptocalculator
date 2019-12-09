@@ -44,8 +44,8 @@ try:
     smallprimeset = set(primesbelow(100000))
     _smallprimeset = 100000
 
-    def is_prime(n, fast=False, precision=25):
-        if not fast:
+    def is_prime(n, fast=False, precision=100):
+        if (not fast) and (len(str(n))<18):
             return is_prime_det(n)
         try:
             n = abs(int(n))
