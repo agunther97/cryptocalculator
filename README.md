@@ -186,6 +186,14 @@ pip install pyreadline
 		* q: prime s.t. q = 3 mod 4
 		* verbose: give step-by-step instructions
 
+### Convert number into RSA-Parsable blocks
+* rsa_block(n,data,verbose=False)
+    * Description: Returns array of numbers below n given large data value
+    * Parameters
+        * n: n=p*q
+        * data: large number in int format
+        * verbose: give step-by-step instructions
+
 ### Break RSA using Quadratic Formula
 * rsa_break_phi(n,phi_n,verbose=False)
     * Description: Returns p and q for a given n
@@ -251,6 +259,14 @@ pip install pyreadline
     * Parameters
         * n: product n=pq of RSA
         * verbose: print commands
+
+### Convert number back from RSA blocks
+* rsa_unblock(n,data,verbose=False)
+    * Description: Returns large int value from array of rsa blocks. Pair with hex(n) for nice formatting.
+    * Parameters
+        * n: n=p*q
+        * data: array of blocks
+        * verbose: give step-by-step instructions
 
 ### Square and Multiply
 * sam(x,c,n)
